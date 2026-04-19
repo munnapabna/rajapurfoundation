@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; scroll-behavior: smooth; background-color: #f9fafb; overflow-x: hidden; }
+        .bg-primary { background-color: #006837; }
+        .text-primary { color: #006837; }
+        .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        
+        /* Swiper Custom Style */
+        .swiper { width: 100%; padding: 20px 0 50px 0; }
+        .program-card {
+            background: #fff; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #f0f0f0;
+            height: 100%; display: flex; flex-direction: column;
+        }
+        .card-image { width: 100%; height: 230px; object-fit: cover; }
+        .card-content { padding: 25px; flex-grow: 1; }
+        .category-tag { color: #d68910; font-size: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .card-title { font-size: 22px; font-weight: 700; color: #1a3c34; margin-bottom: 10px; }
+        .card-desc { font-size: 15px; color: #555; line-height: 1.6; margin-bottom: 20px; }
+        .details-btn {
+            display: block; text-align: center; padding: 10px;
+            border: 1.5px solid #d1d5db; color: #008b45;
+            text-decoration: none; border-radius: 10px; font-weight: 600; transition: 0.3s;
+        }
+        .details-btn:hover { background: #008b45; color: white; border-color: #008b45; }
+        
+        /* Member Card Style */
+        .member-card {
+            background: #fff; border-radius: 25px; padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #f0f0f0;
+            text-align: center; max-width: 350px; margin: 0 auto;
+        }
+        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 5px solid #e8f5e9; margin: 0 auto 15px; object-fit: cover; }
+
+        /* Sidebar Style */
+        #mySidebar {
+            position: fixed; top: 0; right: 0; width: 280px; height: 100%;
+            background: white; z-index: 1000; transform: translateX(100%);
+            transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding-top: 60px;
+        }
+        #mySidebar.open { transform: translateX(0); }
+        #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 999; }
+        .sidebar-link { padding: 15px 25px; display: block; font-size: 18px; color: #333; border-bottom: 1px solid #f0f0f0; transition: 0.3s; }
+        .sidebar-link:hover { background: #f0fdf4; color: #006837; }
+        .closebtn { position: absolute; top: 15px; left: 20px; font-size: 30px; cursor: pointer; color: #333; }
+
+        /* Footer Style */
+        .footer-main {
+            background-color: #1a3c34; color: #d1d1d1; padding: 60px 20px 20px 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: center bottom; background-repeat: no-repeat; background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Side Menu Content -->
+    <div id="mySidebar">
+        <span class="closebtn" id="close-menu">&times;</span>
+        <a href="index.html" class="sidebar-link"><i class="fa-solid fa-house mr-2"></i> হোম</a>
+        <a href="about.html" class="sidebar-link"><i class="fa-solid fa-circle-info mr-2"></i> আমাদের সম্পর্কে</a>
+        <a href="all-work.html" class="sidebar-link"><i class="fa-solid fa-briefcase mr-2"></i> সকল কার্যক্রম</a>
+        <a href="member.html" class="sidebar-link"><i class="fa-solid fa-users mr-2"></i> সকল সদস্য</a>
+        <a href="https://www.facebook.com/share/17Cp7x8AYT/" class="sidebar-link"><i class="fa-solid fa-envelope mr-2"></i> যোগাযোগ</a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/GmDWJttB/20250526-232045.png" alt="Logo" class="h-12 w-12 object-contain">
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold text-primary leading-tight">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</h1>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest hidden md:block">আলোকিত সমাজ বিনির্মাণে এক ধাপ এগিয়ে</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.facebook.com/share/18gdrN5ejZ/" class="bg-primary text-white px-5 py-2 rounded-md font-semibold hover:bg-green-800 transition hidden sm:block">ফলো</a>
+                <button id="menu-btn" class="text-3xl text-primary focus:outline-none">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gray-900 text-white py-24 px-4 text-center overflow-hidden">
+        <div class="absolute inset-0 opacity-40">
+            <img src="https://i.postimg.cc/jq1wDx16/IMG-7900-(1).jpg" alt="Background" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</h2>
+            <p class="text-lg mb-8 text-gray-200">এটি একটি অরাজনৈতিক, সাংস্কৃতিক, ক্রিড়া,  সামাজিক উন্নয়ন মূলক ও দাওয়াহ ভিত্তিক সংগঠন।</p>
+            <a href="about.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-md font-bold transition inline-block">আমাদের সম্পর্কে জানুন</a>
+        </div>
+    </section>
+
+    <!-- Mission & Goals -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">উম্মাহর স্বার্থে, সুন্নাহর সাথে</h3>
+                <div class="w-20 h-1 bg-yellow-500 mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-8 rounded-xl card-shadow border-t-4 border-green-600">
+                    <i class="fas fa-graduation-cap text-4xl text-green-600 mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">শিক্ষা</h4>
+                    <p class="text-gray-600">দ্বীনি ও আধুনিক শিক্ষার সমন্বয় এবং সামাজিক সচেতনতা বৃদ্ধি ও শিক্ষা উপকরণ বিতরণ।</p>
+                </div>
+                <div class="p-8 rounded-xl card-shadow border-t-4 border-yellow-500">
+                    <i class="fas fa-hand-holding-heart text-4xl text-yellow-500 mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">সেবা</h4>
+                    <p class="text-gray-600">দরিদ্রদের স্বাবলম্বীকরণ, ত্রাণ বিতরণ, বৃক্ষরোপণ ও বিভিন্ন সেবামূলক কার্যক্রম।</p>
+                </div>
+                <div class="p-8 rounded-xl card-shadow border-t-4 border-green-600">
+                    <i class="fas fa-book-open text-4xl text-green-600 mb-4"></i>
+                    <h4 class="text-xl font-bold mb-3">দাওয়াহ</h4>
+                    <p class="text-gray-600">বই বিতরণ, মসজিদে দ্বীনি হালাকাহ এবং দাওয়াহ বিষয়ক বিভিন্ন প্রশিক্ষণ।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section (10 Projects) -->
+    <section id="activities" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-10 text-gray-800">কার্যক্রমসমূহ</h3>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="slider-wrapper">
+                    <!-- JS will load 10 slides here -->
+                </div>
+                <div class="swiper-button-next text-green-700"></div>
+                <div class="swiper-button-prev text-green-700"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="text-center mt-6">
+                <a href="all work.html" class="inline-flex items-center gap-2 bg-green-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-green-800 transition">
+                    সকল কার্যক্রমসমূহ <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">সংগঠনের সদস্যবৃন্দ</h3>
+            <div class="member-card">
+                <img src="https://i.postimg.cc/CL1xFBGs/20260317-141830.jpg" alt="Profile" class="profile-img">
+                <h2 class="text-2xl font-bold text-gray-800 mb-1">মোঃ অনিক হাসান</h2>
+                <div class="text-green-600 font-bold text-lg mb-6">সভাপতি</div>
+                <div class="bg-gray-50 rounded-xl p-5 space-y-3 text-left">
+                    <div class="flex items-center gap-3 text-gray-600">
+                        <i class="fas fa-phone-alt text-green-600"></i> ০১৩০৬৫৫৫৩২০
+                    </div>
+                    <div class="flex items-center gap-3 text-red-600 font-semibold">
+                        <i class="fas fa-tint"></i> রক্ত: A+
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-600">
+                        <i class="fas fa-map-marker-alt text-green-600"></i> রাজাপুর উত্তরপাড়া, পাবনা
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="member.html" class="bg-green-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-green-700 transition inline-block">বাকি সদস্যের তালিকা</a>
+            </div>
+        </div>
+    </section>
+
+
+<section id="join" class="py-16 bg-green-50">
+<div class="container mx-auto px-4 max-w-xl">
+            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-2xl font-bold text-center mb-8 text-gray-800 border-b pb-4">আমাদের পরিকল্পনা</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block font mb-1 text-gray-700">আমাদের স্বপ্ন—একটি আদর্শ, মানবিক ও সেবামূলক সমাজ গড়ে তোলা। এই লক্ষ্যকে সামনে রেখে রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন এর একটি নিজস্ব কমপ্লেক্স প্রতিষ্ঠা করতে চাই, যা হবে মানবকল্যাণের এক অনন্য কেন্দ্র।
+এই কমপ্লেক্স থেকে পরিচালিত হবে বিভিন্ন সেবামূলক কার্যক্রম। আমরা অসহায় ও দরিদ্র মানুষের পাশে দাঁড়াবো, তাদের মৌলিক প্রয়োজন পূরণে সহযোগিতা করবো। গরিব কিন্তু মেধাবী শিক্ষার্থীদের জন্য শিক্ষা সহায়তা, বৃত্তি ও প্রয়োজনীয় উপকরণ প্রদান করা হবে, যেন তারা তাদের স্বপ্ন পূরণ করতে পারে।
+এছাড়াও আমরা দুস্থ ও বেকার মানুষদের স্বাবলম্বী করতে ক্ষুদ্র ব্যবসার ব্যবস্থা করে দেওয়ার উদ্যোগ গ্রহণ করবো, যাতে তারা সম্মানের সাথে জীবিকা নির্বাহ করতে পারে। যুব সমাজকে সঠিক পথে পরিচালিত করতে এবং তাদের দক্ষ করে তুলতে বিভিন্ন প্রশিক্ষণ, কর্মশালা ও দিকনির্দেশনামূলক প্রোগ্রামের আয়োজন করা হবে।
+সবচেয়ে গুরুত্বপূর্ণ বিষয় হলো—এই কেন্দ্র থেকেই ইসলামের সুমহান বার্তা, তাওহিদের দাওয়াত এবং নৈতিক মূল্যবোধ মানুষের মাঝে ছড়িয়ে দেওয়া হবে। আমরা চাই, মানুষ কেবল দুনিয়াবি উন্নতিই নয়, বরং আখিরাতের সফলতার পথও খুঁজে পাক।
+আমাদের এই উদ্যোগ শুধু একটি ভবন নির্মাণের পরিকল্পনা নয়; এটি একটি পরিবর্তনের স্বপ্ন, একটি আলোকিত সমাজ গড়ার অঙ্গীকার।</label>
+                     <a href='https://postimg.cc/RWrV2bmH' target='_blank'><img src='https://i.postimg.cc/13XnnLYJ/20260325-075758.png' border='0' alt='20260325-075758'></a>           
+                    </div>
+</div>
+</section>
+
+    <!-- Join Us -->
+    <section id="join" class="py-16 bg-green-50">
+        <div class="container mx-auto px-4 max-w-xl">
+            <div class="bg-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-2xl font-bold text-center mb-8 text-gray-800 border-b pb-4">আমাদের সাথে যুক্ত হোন</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block font-bold mb-2 text-gray-700">আপনি কি হিসেবে যুক্ত হতে চান?</label>
+                        <select class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                            <option>স্বেচ্ছাসেবক</option>
+                            <option>নিয়মিত দাতা</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2 text-gray-700">নাম</label>
+                        <input type="text" class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" placeholder="আপনার নাম লিখুন">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2 text-gray-700">মোবাইল নাম্বার</label>
+                        <input type="tel" class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" placeholder="০১৭xxxxxxxx">
+                    </div>
+                    <button class="w-full bg-green-700 text-white font-bold py-3 rounded-lg hover:bg-green-800 transition">আবেদন জমা দিন</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <div class="newsletter-container bg-[#00a651] p-10 mx-5 rounded-2xl text-center text-white my-10">
+        <h2 class="text-2xl font-bold mb-5">নিয়মিত নিউজলেটার পেতে সাবস্ক্রাইব করুন</h2>
+        <div class="flex flex-col sm:flex-row justify-center max-w-lg mx-auto bg-white p-2 rounded-lg">
+            <input type="email" placeholder="ইমেইল লিখুন" class="p-3 text-black outline-none flex-grow rounded">
+            <button class="bg-[#e9bc60] text-black font-bold px-6 py-3 rounded mt-2 sm:mt-0">সাবস্ক্রাইব</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-700 pb-10">
+            <div class="col-span-1 md:col-span-1">
+                <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo" class="w-32 mb-5">
+                <p class="text-sm leading-relaxed">এই প্রতিষ্ঠান আর্তমানবতার সেবায় একটি আদর্শ কল্যাণসমাজ বিনির্মাণে কাজ করছে।</p>
+            </div>
+            <div>
+                <h3 class="text-white font-bold border-b-2 border-[#e9bc60] inline-block mb-5">মেনু</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="about.html" class="hover:text-yellow-500">আমাদের সম্পর্কে</a></li>
+                    <li><a href="all work.html" class="hover:text-yellow-500">কার্যক্রমসমূহ</a></li>
+                    <li><a href="member.html" class="hover:text-yellow-500">স্বেচ্ছাসেবক</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold border-b-2 border-[#e9bc60] inline-block mb-5">যুক্ত হোন</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-yellow-500">নিয়মিত দাতা</a></li>
+                    <li><a href="#" class="hover:text-yellow-500">আজীবন সদস্য</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold border-b-2 border-[#e9bc60] inline-block mb-5">যোগাযোগ</h3>
+                <div class="flex space-x-4 mb-5">
+                    <a href="https://www.facebook.com/share/18gdrN5ejZ/" target="_blank" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl hover:bg-blue-700 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://youtube.com/@munna.pabna2k4?si=DoWBTA8SdHD_NqYx" target="_blank" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white text-xl hover:bg-red-700 transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p class="text-xs">রাজাপুর উত্তরপাড়া, পাবনা</p>
+            </div>
+        </div>
+        <div class="text-center mt-10">
+            <p class="text-xs">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন - সর্ব স্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Side Menu Toggle Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('mySidebar');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('close-menu');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('open');
+            overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // 10 Activities Data
+        const programs = [
+            { title: "সিরাত প্রতিযোগিতা", desc: "মানবিক মূল্যবোধসম্পন্ন প্রজন্ম বিনির্মাণের প্রয়াস।", img: "https://i.postimg.cc/ncczjtTp/Picsart-26-03-24-19-21-43-558.jpg", link: "sirat.html" },
+            { title: "দ্বীনি হালাকাহ", desc: "ধর্মীয় জ্ঞান চর্চায় আমাদের নিয়মিত আয়োজন।", img: "https://i.postimg.cc/Y2Qn45jp/Picsart-26-03-24-22-33-51-036.jpg", link: "halaka.html" },
+            { title: "ইদ সামগ্রী বিতরণ", desc: "অসহায়দের মুখে হাসি ফোটাতে ইদ উপহার।", img: "https://i.postimg.cc/vT1GhGKS/Picsart-26-03-25-07-18-41-283.jpg", link: "eid.html" },
+            { title: "শীতবস্ত্র বিতরণ", desc: "শীতার্ত মানুষের মাঝে উষ্ণতা ছড়িয়ে দেয়া।", img: "https://i.postimg.cc/qqZxfxQD/1774876142505.png", link: "sit.html" },
+            { title: "শিশুদের কার্যক্রম", desc: "আগামী দিনের ভবিষ্যৎদের জন্য বিশেষ উদ্যোগ।", img: "https://i.postimg.cc/zXGq0SsJ/Picsart-26-03-25-06-43-47-515.jpg", link: "kids.html" },
+            { title: "তাফসির মাহফিল", desc: "পবিত্র কুরআনের সঠিক জ্ঞান প্রচারের আয়োজন।", img: "https://i.postimg.cc/Y2bvr9kt/Picsart-26-03-25-06-52-38-793.jpg", link: "tafsir.html" },
+            { title: "ইফতার মাহফিল", desc: "রমজানে অসহায় ও সাধারণ মানুষের সাথে ইফতার।", img: "https://i.postimg.cc/k5s06DsC/Picsart-26-03-31-21-29-38-755.jpg", link: "iftar.html" },
+            { title: "রাস্তা সংস্কার", desc: "এলাকার রাস্তাঘাট মেরামত ও চলাচলের উপযোগী করা।", img: "https://i.postimg.cc/Prf2JKc8/Picsart-26-03-24-11-31-18-357.jpg", link: "road.html" },
+            { title: "ফ্রি মেডিকেল ক্যাম্প", desc: "বিনামূল্যে চিকিৎসা ও ঔষধ বিতরণ কার্যক্রম।", img: "https://i.postimg.cc/6pJqz1X5/Picsart-26-03-24-22-41-35-577.jpg", link: "medical.html" },
+            { title: "মক্তব প্রজেক্ট", desc: "শিশুদের বুনিয়াদি ধর্মীয় শিক্ষার জন্য মক্তব পরিচালনা।", img: "https://i.postimg.cc/7LCxk3Dp/Picsart-26-03-25-06-18-54-674.jpg", link: "maktab.html" }
+        ];
+
+        const wrapper = document.getElementById('slider-wrapper');
+        programs.forEach(item => {
+            wrapper.innerHTML += `
+                <div class="swiper-slide h-auto">
+                    <div class="program-card">
+                        <img src="${item.img}" class="card-image" alt="${item.title}">
+                        <div class="card-content">
+                           
+                            <h3 class="card-title">${item.title}</h3>
+                            <p class="card-desc">${item.desc}</p>
+                            <a href="${item.link}" class="details-btn">বিস্তারিত দেখুন</a>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        // Initialize Swiper
+        new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 25,
+            loop: true,
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            }
+        });
+    </script>
+</body>
+</html>

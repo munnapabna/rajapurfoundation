@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>দ্বীনি হালাকাহ - রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #00834a;
+            --light-green: #e9f5ef;
+            --orange: #d9a656;
+            --text-color: #333;
+            --bg-gray: #f8f9fa;
+            --footer-dark: #1a1a1a;
+            --newsletter-green: #006b3c;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sidebar & Header (Same as original) */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; right: 0;
+            background-color: #fff; overflow-x: hidden; transition: 0.4s; padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar a { padding: 12px 32px; text-decoration: none; font-size: 18px; color: #333; display: block; transition: 0.3s; border-bottom: 1px solid #f1f1f1; }
+        .sidebar a:hover { background-color: var(--light-green); color: var(--primary-green); }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; cursor: pointer; color: var(--primary-green); }
+        #overlay { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5); z-index: 1500; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 5%;
+            border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo img { height: 50px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .btn-donate { background: var(--primary-green); color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .menu-icon { font-size: 24px; cursor: pointer; color: var(--primary-green); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.postimg.cc/7YCHNsFQ/Picsart-26-04-19-18-07-35-440.jpg');
+            background-size: cover; background-position: center; height: 300px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+        }
+        .hero h1 { font-size: 38px; margin-bottom: 10px; }
+
+        /* Halakah Section Style */
+        .halakah-block {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px inset #eee;
+        }
+        .section-title {
+            font-size: 26px; color: var(--primary-green); margin: 30px 0 15px;
+            border-left: 5px solid var(--orange); padding-left: 15px;
+        }
+        .description { margin-bottom: 25px; text-align: justify; color: #444; }
+
+        /* Gallery System */
+        .gallery-main { width: 100%; margin-bottom: 10px; }
+        .gallery-main img { 
+            width: 100%; border-radius: 12px; max-height: 500px; 
+            object-fit: cover; transition: 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-thumbs {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+        }
+        .gallery-thumbs img { 
+            width: 100%; height: 70px; object-fit: cover; border-radius: 6px; 
+            cursor: pointer; opacity: 0.5; transition: 0.2s; border: 2px solid transparent;
+        }
+        .gallery-thumbs img:hover, .gallery-thumbs img.active { 
+            opacity: 1; border: 2px solid var(--primary-green); 
+        }
+
+        /* Footer & Newsletter */
+        .newsletter-section {
+            background-color: var(--newsletter-green); border-radius: 15px;
+            padding: 40px 20px; text-align: center; margin: 40px 20px -60px;
+            position: relative; z-index: 10; color: white;
+        }
+        footer {
+            background-color: #1a1a1a; color: #d1d1d1; padding: 100px 5% 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: bottom center; background-repeat: no-repeat; background-size: cover;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px; font-size: 14px; }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+            .hero h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar & Overlay -->
+    <div id="overlay" onclick="closeNav()"></div>
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> হোম</a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+        <a href="all work.html"><i class="fa-solid fa-briefcase"></i> সকল কার্যক্রম</a>
+        <a href="member.html"><i class="fa-solid fa-users"></i> সকল সদস্য</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <a href="https://www.facebook.com/share/18RibWS97Z/" class="btn-donate">ফলো করুন</a>
+            <i class="fa-solid fa-bars menu-icon" onclick="openNav()"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>দ্বীনি হালাকাহ </h1>
+        <p>জ্ঞানের সন্ধানে ও আত্মিক প্রশান্তিতে আমাদের নিয়মিত আয়োজন</p>
+    </section>
+
+    <main class="container">
+
+        <!-- Halakah 01 -->
+        <section class="halakah-block">
+            <h2 class="section-title"> ১ম তালিম. "সন্তান লালন পালনে মায়ের ভূমিকা"</h2>
+            <p class="description">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশনের উদ্যোগে আয়োজন করা হয়েছিলো মা-বোনদের জন্য এক বিশেষ তালিম। এতে প্রধান আলোচক হিসেবে উপস্থিত থাকবেন সম্মানিত মুফতি আবু ইউসুফ হাফিজাহুল্লাহ।
+এই তালিমের মূল বিষয় থাকবে— “সন্তান লালন-পালনে মায়ের ভূমিকা”, যেখানে ইসলামিক দৃষ্টিকোণ থেকে গুরুত্বপূর্ণ দিকনির্দেশনা প্রদান করা হয় আলহামদুলিল্লাহ।
+📅 তারিখ: ১৭ই এপ্রিল ২০২৬, শুক্রবার
+🕙 সময়: সকাল ১০টা থেকে ১১:৩০ টা
+📍 স্থান: রাজাপুর জামে মসজিদের ২ বাড়ি পূর্বে (রানার বাড়ি)
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg1" src="https://i.postimg.cc/pXDFZb4/20260413-201312.png" alt="Halakah 1">
+                </div>
+               <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/pXDFZdb4/20260413-201312.png" class="active" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/Kc3L1N9B/20260417-102759-resized.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/02pwfN15/20260417-102724.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/65dv0Qx9/20260417-102753.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/qM83L7Hr/20260417-105347.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/NfhXmHVV/20260417-105339.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/Prmw4qn5/20260417-105357.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/pXNjzF7S/20260417-105347.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/FHNJnQhK/20260417-090634.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/qM83L7Vw/20260417-100259.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/GmdsS1bY/20260417-105537.jpg" onclick="changeImg(this, 'mainImg1')">
+                  
+                   
+                </div>
+            </div>
+        </section>
+
+     
+
+    </main>
+
+    <div class="newsletter-section container">
+        <h2>দ্বীনি কার্যক্রমে আপডেট থাকতে যুক্ত হোন</h2>
+        <div style="display: flex; justify-content: center; margin-top: 15px;">
+            <a href="https://www.facebook.com/share/18EjS1JRBt/" style="background: var(--orange); color: #000; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">ফলো করুন</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo" style="width: 120px; margin-bottom: 20px;">
+                    <p>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন একটি অরাজনৈতিক ও সমাজসেবামূলক প্রতিষ্ঠান। আমরা কোরআন ও সুন্নাহর আলোকে সমাজ বিনির্মাণে কাজ করে যাচ্ছি।</p>
+                </div>
+                <div>
+                    <h4>লিঙ্ক</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="index.html" style="color: #aaa; text-decoration: none;">হোম</a></li>
+                        <li><a href="all work.html" style="color: #aaa; text-decoration: none;">কার্যক্রম</a></li>
+                        <li><a href="https://www.facebook.com/share/1DxbicGFvF/" style="color: #aaa; text-decoration: none;">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>সোশ্যাল মিডিয়া</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="https://www.facebook.com/share/1DxbicGFvF/" style="color: white; font-size: 20px;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://youtube.com/@munna.pabna2k4?si=kYG1sAvLXhE2JG2E" style="color: white; font-size: 20px;"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন - সর্ব স্বত্ব সংরক্ষিত।</div>
+        </div>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "280px";
+            document.getElementById("overlay").style.display = "block";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Gallery Control
+        function changeImg(element, targetMainImgId) {
+            const mainImg = document.getElementById(targetMainImgId);
+            mainImg.style.opacity = "0.3";
+            
+            setTimeout(() => {
+                mainImg.src = element.src;
+                mainImg.style.opacity = "1";
+            }, 150);
+
+            let parentGallery = element.closest('.gallery-container');
+            let thumbs = parentGallery.querySelectorAll(".gallery-thumbs img");
+            thumbs.forEach(img => img.classList.remove("active"));
+            element.classList.add("active");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f2f5f4; padding-bottom: 50px; }
+        
+        /* হেডার */
+        .header { 
+            background: white; 
+            text-align: center; 
+            padding: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            margin-bottom: 30px; 
+            position: relative;
+        }
+        .header img { width: 100px; height: 100px; margin-bottom: 10px; border-radius: 50%; border: 2px solid #27ae60; }
+        .header h1 { font-size: 35px; color: #27ae60; }
+
+        /* মেনু বাটন */
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #27ae60;
+            background: #f0fdf4;
+            padding: 5px 12px;
+            border-radius: 8px;
+        }
+
+        /* সাইড মেনু স্টাইল */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s ease;
+            padding: 25px;
+        }
+        .side-menu.active {
+            right: 0;
+        }
+        .close-btn {
+            font-size: 30px;
+            color: #e74c3c;
+            cursor: pointer;
+            display: block;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .side-nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: 0.3s;
+        }
+        .side-nav-links a:hover {
+            background: #f0fdf4;
+            color: #27ae60;
+            padding-left: 20px;
+        }
+
+        .container { width: 95%; max-width: 1300px; margin: 0 auto; }
+
+        /* সেকশন বাটন */
+        .section-label { 
+            background: #27ae60; color: white; padding: 10px 40px; 
+            border-radius: 30px; font-size: 22px; font-weight: 600; 
+            margin: 50px auto 25px auto; text-align: center; display: table;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* গ্রিড লেআউট */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+
+        /* কার্ড ডিজাইন */
+        .card { 
+            background: white; border-radius: 20px; padding: 20px; 
+            text-align: center; border: 1px solid #e0e0e0; transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .card img { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #f0fdf4; margin: 0 auto 15px auto; object-fit: cover; }
+        .card h2 { font-size: 19px; color: #333; margin-bottom: 5px; }
+        .card .pos { font-size: 16px; color: #27ae60; font-weight: 600; margin-bottom: 15px; }
+
+        .info { background: #f8f9fa; border-radius: 12px; padding: 12px; text-align: left; font-size: 14px; color: #555; margin-bottom: 15px; }
+        .info p { display: flex; align-items: center; margin-bottom: 5px; }
+        .info p i { margin-right: 8px; width: 15px; text-align: center; }
+        .blood { color: #e74c3c; font-weight: bold; }
+
+        /* ফেসবুক বাটন */
+        .fb-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1877F2;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .fb-btn i { margin-right: 8px; font-size: 18px; }
+        .fb-btn:hover { background: #145dbf; transform: scale(1.05); }
+
+        /* মোবাইল স্ক্রিনের জন্য */
+        @media (max-width: 900px) {
+            .grid-3, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid-3, .grid-5 { grid-template-columns: repeat(1, 1fr); }
+            .header h1 { font-size: 22px; }
+            .header { padding: 20px; }
+            .header img { width: 80px; height: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- সাইড মেনু এইচটিএমএল -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <span class="close-btn" id="closeMenu">&times;</span>
+        <nav class="side-nav-links">
+            <a href="index.html">হোম</a>
+            <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+            <a href="all work.html">সকল কার্যক্রম</a>
+            <a href="member.html">সদস্য পরিচয়</a>
+            <a href="gallery.html">গ্যালারি</a>
+        </nav>
+    </div>
+
+    <!-- হেডার -->
+    <div class="header">
+        <div class="menu-btn" id="openMenu">☰</div>
+        <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        <h1>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- ১. কার্যকারী কমিটি -->
+        <div class="section-label">কার্যকারী কমিটি</div>
+        <div class="grid-3">
+            
+            <div class="card">
+                <img src="https://i.postimg.cc/P5kJ7GhR/IMG-20250822-WA0009-resized.jpg"> 
+                <h2>মোঃ অনিক হাসান</h2><p class="pos">আমির</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01306555320</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div> 
+                <a href="https://www.facebook.com/share/17ZBreSuHm/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/5NVB9Fbn/IMG-20250822-WA0010-resized.jpg">
+                <h2>সায়েম আলী</h2><p class="pos">নায়েবে আমির</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01586351046</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/17uWkTzsbz/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/L8bKMSL4/IMG-20250822-WA0010-resized-(2).jpg">
+                <h2>মোঃ মুন্না</h2><p class="pos">বাইতুল মাল</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01774831019</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: AB+ </p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/18JQy9Hn11/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/024ckyWH/IMG-20250822-WA0010-resized-(1).jpg">
+                <h2>রিয়াজুল ইসলাম</h2><p class="pos">সাংস্কৃতিক সম্পাদক</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01310321052</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> কাঁকর কাটা, পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1BFceggbRc/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/MTvGSwsZ/FB_IMG_1774977991140.jpg">
+                <h2>সুজন মাহমুদ</h2><p class="pos">শিক্ষা সম্পাদক</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01640360690</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1ScCzsGGpd/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/yNJq6NHY/FB-IMG-1774978052238.jpg">
+                <h2>হাসান</h2><p class="pos">ক্রিড়া সম্পাদক</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01706503374</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1DQ1Z7zLFX/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+        </div>
+
+        <!-- ২. বিশেষ সদস্য -->
+        <div class="section-label">বিশেষ সদস্য</div>
+        <div class="grid-3">
+            <div class="card">
+                <img src="https://i.postimg.cc/y622nKcm/FB-IMG-1774978434594.jpg">
+                <h2>সোহাগ</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসী</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: O+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1BTyMR22zD/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/NfmGkp9H/FB-IMG-1774978641917.jpg">
+                <h2>বিপ্লব</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01774-290990</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p><p><i class="fa-solid fa-location-dot"></i> কাঁকর কাটা,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1Arvs4JSoz/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/BQKbwJyC/FB-IMG-1774978770535.jpg">
+                <h2>সুমন</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসী</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B-</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1EVZ84XEgA/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/jqQnsxc3/FB-IMG-1774978940418.jpg">
+                <h2>শাকিল</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসী</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: ...</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1YserttcS3/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/dQpCHHWG/FB-IMG-1774979101169.jpg">
+                <h2>সুমন</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01754175323</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1AcYW5mc2s/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/T1p5TnHN/IMG-7900-(1)-resized.jpg">
+                <h2>রাজা</h2><p class="pos">সম্মানিত সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> ‎01794051766‎</p><p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="#" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+        </div>
+
+        <!-- ৩. সাধারণ সদস্য -->
+        <div class="section-label">সাধারণ সদস্য</div>
+        <div class="grid-5">
+            <div class="card">
+                <img src="https://i.postimg.cc/yNcJdVjH/Screenshot-20260401-095513-Facebook.jpg">
+                <h2>মাহফুজ আহমেদ</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01316011493</p><p class="blood"><i class="fa-solid fa-droplet"></i> ...</p><p><i class="fa-solid fa-location-dot"></i> কাঁকর কাটা, পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1Lf93Moq8Y/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/pdfTvsVy/FB-IMG-1775015620697.jpg">
+                <h2>মোঃ নাজিম</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01764856686</p><p class="blood"><i class="fa-solid fa-droplet"></i> O+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1bLUJvLY8L/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/BQRQ1rX6/FB-IMG-1775015543955.jpg">
+                <h2>বাদশা</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসী</p><p class="blood"><i class="fa-solid fa-droplet"></i> A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1AJ9ToQvt7/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/tJYpskbV/FB-IMG-1775015583968.jpg">
+                <h2>আবু মুসা</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসী</p><p class="blood"><i class="fa-solid fa-droplet"></i> A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1E5BQm3eCf/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/YSRH8Zqw/FB-IMG-1775015644491.jpg">
+                <h2>নাজমুল </h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01302236484</p><p class="blood"><i class="fa-solid fa-droplet"></i> A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1Hq1BRXEvH/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/59wZmDPh/20260110-154725-resized.jpg">
+                <h2>হাফিজ</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01615459310</p><p class="blood"><i class="fa-solid fa-droplet"></i> AB+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/19fpBkdP6q/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/8kJCPkzF/FB-IMG-1775015803595.jpg">
+                <h2>আরিফ</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01799717638</p><p class="blood"><i class="fa-solid fa-droplet"></i> B+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1HM6VSEqRY/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/zfGzm8Qd/FB-IMG-1775015836889.jpg">
+                <h2>রাকিবুল ইসলাম </h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01602412997</p><p class="blood"><i class="fa-solid fa-droplet"></i> B+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1Amoxoj1KB/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/qqVH7T1Q/FB-IMG-1775015900322.jpg">
+                <h2>সাকিব</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01735202741</p><p class="blood"><i class="fa-solid fa-droplet"></i> B+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/17rEngda2Y/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/xd2mLJcJ/FB-IMG-1775017466068.jpg">
+                <h2>সাগর</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01765-615716</p><p class="blood"><i class="fa-solid fa-droplet"></i> ...</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1aZukJXQpe/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/RCWfzRBz/FB-IMG-1775056792488.jpg">
+                <h2>জনি</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01310604541</p><p class="blood"><i class="fa-solid fa-droplet"></i> A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1Cn7M5aa8g/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/sXvBsVty/FB-IMG-1775056823388.jpg">
+                <h2>সজিব</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> প্রবাসি</p><p class="blood"><i class="fa-solid fa-droplet"></i> A+</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1E1rdbDi11/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+            <div class="card">
+                <img src="https://i.postimg.cc/9FGDWgg6/FB-IMG-1775057008830.jpg">
+                <h2>শাহিন</h2><p class="pos">সদস্য</p>
+                <div class="info"><p><i class="fa-solid fa-phone"></i> 01752377121</p><p class="blood"><i class="fa-solid fa-droplet"></i> ...</p><p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p></div>
+                <a href="https://www.facebook.com/share/1ECnWQRU2T/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- জাভাস্ক্রিপ্ট -->
+    <script>
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        openMenu.addEventListener('click', () => {
+            sideMenu.classList.add('active');
+            menuOverlay.style.display = 'block';
+        });
+
+        const hideMenu = () => {
+            sideMenu.classList.remove('active');
+            menuOverlay.style.display = 'none';
+        };
+
+        closeMenu.addEventListener('click', hideMenu);
+        menuOverlay.addEventListener('click', hideMenu);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f2f5f4; padding-bottom: 50px; }
+        
+        /* হেডার */
+        .header { 
+            background: white; 
+            text-align: center; 
+            padding: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            margin-bottom: 30px; 
+            position: relative;
+        }
+        .header img { width: 100px; height: 100px; margin-bottom: 10px; border-radius: 50%; border: 2px solid #27ae60; }
+        .header h1 { font-size: 35px; color: #27ae60; }
+
+        /* মেনু বাটন */
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #27ae60;
+            background: #f0fdf4;
+            padding: 5px 12px;
+            border-radius: 8px;
+        }
+
+        /* সাইড মেনু স্টাইল */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s ease;
+            padding: 25px;
+        }
+        .side-menu.active {
+            right: 0;
+        }
+        .close-btn {
+            font-size: 30px;
+            color: #e74c3c;
+            cursor: pointer;
+            display: block;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .side-nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: 0.3s;
+        }
+        .side-nav-links a:hover {
+            background: #f0fdf4;
+            color: #27ae60;
+            padding-left: 20px;
+        }
+
+        .container { width: 95%; max-width: 1300px; margin: 0 auto; }
+
+        /* সেকশন বাটন */
+        .section-label { 
+            background: #27ae60; color: white; padding: 10px 40px; 
+            border-radius: 30px; font-size: 22px; font-weight: 600; 
+            margin: 50px auto 25px auto; text-align: center; display: table;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* গ্রিড লেআউট */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+
+        /* কার্ড ডিজাইন */
+        .card { 
+            background: white; border-radius: 20px; padding: 15px; 
+            text-align: center; border: 1px solid #e0e0e0; transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        /* ছবি পরিবর্তন করা হয়েছে এখানে */
+        .card img { 
+            width: 100%; 
+            height: 250px; 
+            border-radius: 12px; 
+            border: 2px solid #f0fdf4; 
+            margin: 0 auto 15px auto; 
+            object-fit: cover; 
+        }
+
+        .card h2 { font-size: 19px; color: #333; margin-bottom: 5px; }
+        .card .pos { font-size: 16px; color: #27ae60; font-weight: 600; margin-bottom: 15px; }
+
+        .info { background: #f8f9fa; border-radius: 12px; padding: 12px; text-align: left; font-size: 14px; color: #555; margin-bottom: 15px; }
+        .info p { display: flex; align-items: center; margin-bottom: 5px; }
+        .info p i { margin-right: 8px; width: 15px; text-align: center; }
+        .blood { color: #e74c3c; font-weight: bold; }
+
+        /* ফেসবুক বাটন */
+        .fb-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1877F2;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .fb-btn i { margin-right: 8px; font-size: 18px; }
+        .fb-btn:hover { background: #145dbf; transform: scale(1.05); }
+
+        /* মোবাইল স্ক্রিনের জন্য */
+        @media (max-width: 900px) {
+            .grid-3, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .grid-3, .grid-5 { grid-template-columns: repeat(1, 1fr); }
+            .header h1 { font-size: 22px; }
+            .header { padding: 20px; }
+            .header img { width: 80px; height: 80px; }
+            .card img { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- সাইড মেনু এইচটিএমএল -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <span class="close-btn" id="closeMenu">&times;</span>
+        <nav class="side-nav-links">
+            <a href="index.html">হোম</a>
+            <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+            <a href="all work.html">সকল কার্যক্রম</a>
+            <a href="member.html">সদস্য পরিচয়</a>
+        </nav>
+    </div>
+
+    <!-- হেডার -->
+    <div class="header">
+        <div class="menu-btn" id="openMenu">☰</div>
+        <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        <h1>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- ১. কার্যকারী কমিটি -->
+        <div class="section-label">যারা রক্ত দান করে থাকে</div>
+        <div class="grid-3">
+            
+            <div class="card">
+                <img src="https://i.postimg.cc/pX3bC2xW/FB-IMG-1774372973652.jpg"> 
+                <h2>মোঃ সুমন</h2><p class="pos">প্রবাসি</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> +971559786344</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B-</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div> 
+                <a href="https://www.facebook.com/share/1NjEgKGXCP/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/136xYL56/received-1051847599554984.jpg">
+                <h2>নাজিম</h2><p class="pos">কর্মজীবি</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01764856686</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: O+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1ErxVRpNoX/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/136xYL5J/20250617-221953-resized.jpg">
+                <h2>মোঃ মুন্না</h2><p class="pos">বেকার</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01774831019</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: AB+ </p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/18JQy9Hn11/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/65FJc9w2/received-1421623346064966.jpg">
+                <h2>আরিফ</h2><p class="pos">কর্মজীবি</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01799717638</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: B+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1Zy3d11nWA/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/kg8rhkX6/received-728505229629317.jpg">
+                <h2>হাসান</h2><p class="pos">শিক্ষার্থী</p>
+                <div class="info">
+                    <p><i class="fa-solid fa-phone"></i> 01706503374</p>
+                    <p class="blood"><i class="fa-solid fa-droplet"></i> রক্ত: A+</p>
+                    <p><i class="fa-solid fa-location-dot"></i> রাজাপুর উত্তরপাড়া,পাবনা</p>
+                </div>
+                <a href="https://www.facebook.com/share/1DQ1Z7zLFX/" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook"></i> ফেসবুক আইডি</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- জাভাস্ক্রিপ্ট -->
+    <script>
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        openMenu.addEventListener('click', () => {
+            sideMenu.classList.add('active');
+            menuOverlay.style.display = 'block';
+        });
+
+        const hideMenu = () => {
+            sideMenu.classList.remove('active');
+            menuOverlay.style.display = 'none';
+        };
+
+        closeMenu.addEventListener('click', hideMenu);
+        menuOverlay.addEventListener('click', hideMenu);
+    </script>
+
+</body>
+</html>

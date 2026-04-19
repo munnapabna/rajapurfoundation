@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>দ্বীনি হালাকাহ - রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #00834a;
+            --light-green: #e9f5ef;
+            --orange: #d9a656;
+            --text-color: #333;
+            --bg-gray: #f8f9fa;
+            --footer-dark: #1a1a1a;
+            --newsletter-green: #006b3c;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sidebar & Header (Same as original) */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; right: 0;
+            background-color: #fff; overflow-x: hidden; transition: 0.4s; padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar a { padding: 12px 32px; text-decoration: none; font-size: 18px; color: #333; display: block; transition: 0.3s; border-bottom: 1px solid #f1f1f1; }
+        .sidebar a:hover { background-color: var(--light-green); color: var(--primary-green); }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 20px; font-size: 36px; cursor: pointer; color: var(--primary-green); }
+        #overlay { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.5); z-index: 1500; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 5%;
+            border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 1000;
+        }
+        .logo img { height: 50px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .btn-donate { background: var(--primary-green); color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .menu-icon { font-size: 24px; cursor: pointer; color: var(--primary-green); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.postimg.cc/RZ2TX4Ff/Picsart-26-04-06-22-39-30-474.jpg');
+            background-size: cover; background-position: center; height: 300px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+        }
+        .hero h1 { font-size: 38px; margin-bottom: 10px; }
+
+        /* Halakah Section Style */
+        .halakah-block {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px inset #eee;
+        }
+        .section-title {
+            font-size: 26px; color: var(--primary-green); margin: 30px 0 15px;
+            border-left: 5px solid var(--orange); padding-left: 15px;
+        }
+        .description { margin-bottom: 25px; text-align: justify; color: #444; }
+
+        /* Gallery System */
+        .gallery-main { width: 100%; margin-bottom: 10px; }
+        .gallery-main img { 
+            width: 100%; border-radius: 12px; max-height: 500px; 
+            object-fit: cover; transition: 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .gallery-thumbs {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+        }
+        .gallery-thumbs img { 
+            width: 100%; height: 70px; object-fit: cover; border-radius: 6px; 
+            cursor: pointer; opacity: 0.5; transition: 0.2s; border: 2px solid transparent;
+        }
+        .gallery-thumbs img:hover, .gallery-thumbs img.active { 
+            opacity: 1; border: 2px solid var(--primary-green); 
+        }
+
+        /* Footer & Newsletter */
+        .newsletter-section {
+            background-color: var(--newsletter-green); border-radius: 15px;
+            padding: 40px 20px; text-align: center; margin: 40px 20px -60px;
+            position: relative; z-index: 10; color: white;
+        }
+        footer {
+            background-color: #1a1a1a; color: #d1d1d1; padding: 100px 5% 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: bottom center; background-repeat: no-repeat; background-size: cover;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px; font-size: 14px; }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+            .hero h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar & Overlay -->
+    <div id="overlay" onclick="closeNav()"></div>
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> হোম</a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+        <a href="all work.html"><i class="fa-solid fa-briefcase"></i> সকল কার্যক্রম</a>
+        <a href="member.html"><i class="fa-solid fa-users"></i> সকল সদস্য</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <a href="https://www.facebook.com/share/18RibWS97Z/" class="btn-donate">ফলো করুন</a>
+            <i class="fa-solid fa-bars menu-icon" onclick="openNav()"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>দ্বীনি হালাকাহ </h1>
+        <p>জ্ঞানের সন্ধানে ও আত্মিক প্রশান্তিতে আমাদের নিয়মিত আয়োজন</p>
+    </section>
+
+    <main class="container">
+
+        <!-- Halakah 01 -->
+        <section class="halakah-block">
+            <h2 class="section-title"> ৫ম হালাকাহ. "দাওয়াতি কাজের গুরুত্ব"</h2>
+            <p class="description">৯ জানুয়ারি ২০২৬ তারিখে সফলভাবে অনুষ্ঠিত হয় ৫ম তম হালাকা। উক্ত হালাকায় সম্মানিত মেহমান হিসেবে উপস্থিত ছিলেন মাওলানা রইচউদ্দিন সাহেব। তিনি “দাওয়াতি কাজের গুরুত্ব” বিষয়ের উপর অত্যন্ত গুরুত্বপূর্ণ ও প্রেরণাদায়ক আলোচনা পেশ করেন। তাঁর বক্তব্যে দাওয়াহর প্রয়োজনীয়তা, এর ফজিলত এবং ব্যক্তি ও সমাজ জীবনে এর ইতিবাচক প্রভাব তুলে ধরা হয়।
+হালাকায় উপস্থিত মুসল্লীগণ গভীর মনোযোগ সহকারে আলোচনা শ্রবণ করেন এবং তা থেকে উপকৃত হন। আলোচনা শেষে সকল উপস্থিতিদের জন্য আন্তরিক মেহমানদারীর ব্যবস্থা করা হয়, যা পুরো আয়োজনকে আরও সুন্দর ও প্রাণবন্ত করে তোলে।</p>
+            
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg1" src="https://i.postimg.cc/0yNZXznt/FB_IMG_1775489242318.jpg" alt="Halakah 1">
+                </div>
+                <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/0yNZXznt/FB_IMG_1775489242318.jpg" class="active" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/pXCqBfQb/FB_IMG_1775489235091.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/15BJKG0x/FB_IMG_1775489230558.jpg" onclick="changeImg(this, 'mainImg1')">
+                    <img src="https://i.postimg.cc/cJvWW41G/received-731472402962660.jpg" onclick="changeImg(this, 'mainImg1')">
+                </div>
+            </div>
+        </section>
+
+        <!-- Halakah 02 -->
+        <section class="halakah-block">
+            <h2 class="section-title">৪র্থ হালাকা. " 'কোরআন' হেদায়েতের আলোকবর্তিতা"</h2>
+           <p class="description">৭ নভেম্বর ২০২৫ তারিখে সফলভাবে অনুষ্ঠিত হয় ৪র্থ তম হালাকা। উক্ত হালাকায় সম্মানিত মেহমান হিসেবে উপস্থিত ছিলেন মাওলানা মাহবুবুর রহমান সাহেব। তিনি ‘কোরআন: হেদায়েতের আলোকবর্তিতা’ বিষয়ের উপর হৃদয়গ্রাহী ও দিকনির্দেশনামূলক আলোচনা উপস্থাপন করেন। তাঁর বক্তব্যে পবিত্র কোরআনের গুরুত্ব, মানবজীবনে এর প্রভাব এবং সঠিক পথ প্রদর্শনে এর ভূমিকা সুন্দরভাবে তুলে ধরা হয়।
+হালাকায় উপস্থিত মুসল্লীগণ মনোযোগ সহকারে আলোচনা শ্রবণ করেন এবং তা থেকে উপকৃত হন। আলোচনা শেষে সকল উপস্থিত মুসল্লীদের জন্য আন্তরিক মেহমানদারীর ব্যবস্থা করা হয়, যা আয়োজনটিকে আরও সৌহার্দ্যপূর্ণ ও আনন্দঘন করে তোলে।</p>
+            
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg2" src="https://i.postimg.cc/Jz4BCgyz/FB_IMG_1775490156588.jpg" alt="Halakah 2">
+                </div>
+                <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/Jz4BCgyz/FB_IMG_1775490156588.jpg" class="active" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/t4CVGf1X/FB_IMG_1775490172622.jpg" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/YCnLr3gk/FB_IMG_1775490177864.jpg" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/rwnRVJWM/FB_IMG_1775490180622.jpg" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/T375d9mR/FB_IMG_1775490184130.jpg" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/FHsJXqfr/FB_IMG_1775490165481.jpg" onclick="changeImg(this, 'mainImg2')">
+                    <img src="https://i.postimg.cc/GmhsnNB3/FB_IMG_1775490162997.jpg" onclick="changeImg(this, 'mainImg2')">             
+             </div>
+            </div>
+        </section>
+
+        <!-- Halakah 03 -->
+        <section class="halakah-block">
+            <h2 class="section-title">৩য় হালাকা "রাসুল সাঃ এর জীবনী থেকে শিক্ষা"</h2>
+            <p class="description">২২ আগস্ট ২০২৫ তারিখে সফলভাবে অনুষ্ঠিত হয় ৩য় তম হালাকা। উক্ত হালাকায় সম্মানিত মেহমান হিসেবে উপস্থিত ছিলেন শায়েখ মাহফুজুর রহমান সাহেব। তিনি ‘রাসুল (সাঃ)-এর জীবনী থেকে শিক্ষা’ বিষয়ের উপর অত্যন্ত হৃদয়গ্রাহী ও প্রেরণাদায়ক আলোচনা উপস্থাপন করেন। তাঁর বক্তব্যে প্রিয় নবী (সাঃ)-এর আদর্শ জীবন, চরিত্রগুণ এবং তা থেকে আমাদের দৈনন্দিন জীবনে অনুসরণীয় দিকগুলো সুন্দরভাবে তুলে ধরা হয়।
+            হালাকায় উপস্থিত মুসল্লীগণ গভীর মনোযোগ সহকারে আলোচনা শ্রবণ করেন এবং তা থেকে উপকৃত হন। আলোচনা শেষে সকল উপস্থিত মুসল্লীদের জন্য আন্তরিক মেহমানদারীর ব্যবস্থা করা হয়, যা পুরো আয়োজনকে আরও আনন্দময় ও সৌহার্দ্যপূর্ণ করে তোলে।</p>
+
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg3" src="https://i.postimg.cc/vZZF77KP/FB_IMG_1775490964150.jpg" alt="Halakah 3">
+                </div>
+                <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/vZZF77KP/FB_IMG_1775490964150.jpg" class="active" onclick="changeImg(this, 'mainImg3')">
+                    <img src="https://i.postimg.cc/jSS0661Q/FB_IMG_1775490968088.jpg" onclick="changeImg(this, 'mainImg3')">
+                    <img src="https://i.postimg.cc/Bnn955zm/FB_IMG_1775490975439.jpg" onclick="changeImg(this, 'mainImg3')">
+                    <img src="https://i.postimg.cc/FHH5bb6y/FB_IMG_1775490981886.jpg" onclick="changeImg(this, 'mainImg3')">
+                    <img src="https://i.postimg.cc/Bn7WmL9Q/Picsart_26_04_06_22_02_43_837.jpg" onclick="changeImg(this, 'mainImg3')">
+                </div>
+            </div>
+        </section>
+
+        <!-- Halakah 04 -->
+        <section class="halakah-block">
+            <h2 class="section-title">২য় হালাকা "আল্লাহর সাথে সম্পর্ক গড়া"</h2>
+            <p class="description">২৫ জুলাই ২০২৫ তারিখে সফলভাবে অনুষ্ঠিত হয় হালাকার একটি গুরুত্বপূর্ণ আসর। উক্ত হালাকায় সম্মানিত মেহমান হিসেবে উপস্থিত ছিলেন হাফেজ মাওলানা আশিকুল বারী সাহেব। তিনি ‘আল্লাহর সাথে সম্পর্ক গড়া’ বিষয়ের উপর অত্যন্ত হৃদয়স্পর্শী ও প্রেরণাদায়ক আলোচনা পেশ করেন। তাঁর বক্তব্যে আল্লাহর নৈকট্য অর্জনের উপায়, ইবাদতের গুরুত্ব এবং আত্মশুদ্ধির প্রয়োজনীয়তা সুন্দরভাবে তুলে ধরা হয়।
+হালাকায় উপস্থিত মুসল্লীগণ গভীর মনোযোগ সহকারে আলোচনা শ্রবণ করেন এবং তা থেকে গুরুত্বপূর্ণ দিকনির্দেশনা লাভ করেন। আলোচনা শেষে সকল উপস্থিত মুসল্লীদের জন্য আন্তরিক মেহমানদারীর ব্যবস্থা করা হয়, যা পুরো আয়োজনকে আরও সৌহার্দ্যপূর্ণ ও প্রাণবন্ত করে তোলে।</p>
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg4" src="https://i.postimg.cc/YqJD06HH/FB_IMG_1775492171838.jpg" alt="Halakah 4">
+                </div>
+                <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/YqJD06HH/FB_IMG_1775492171838.jpg" class="active" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/Fs2Czy4m/FB_IMG_1775492176165.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/Fs2Czy45/FB_IMG_1775492179064.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/dtzN32YM/FB_IMG_1775492185442.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/65DbqrX2/FB_IMG_1775492191894.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/Fs2Czy4H/FB_IMG_1775492182020.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/zX92vCry/FB_IMG_1775492188421.jpg" onclick="changeImg(this, 'mainImg4')">
+                    <img src="https://i.postimg.cc/ZK1sn8Sy/FB_IMG_1775492194761.jpg" onclick="changeImg(this, 'mainImg4')">
+                </div>
+            </div>
+        </section>
+
+        <!-- Halakah 05 -->
+        <section class="halakah-block">
+            <h2 class="section-title">১ম হালাকা " ইমান কি ও এর স্তর"</h2>
+            <p class="description">২০ জুন ২০২৫ তারিখে সফলভাবে অনুষ্ঠিত হয় ৩য় তম হালাকা। উক্ত হালাকায় সম্মানিত মেহমান হিসেবে উপস্থিত ছিলেন মুফতি জাফর আহমেদ শিবলী (হাফিঃ) এবং মাওলানা মোশারফ হোসেন জিহাদী সাহেব। তাঁরা ‘ইমান কী ও এর স্তর’ বিষয়ের উপর অত্যন্ত গুরুত্বপূর্ণ ও শিক্ষণীয় আলোচনা পেশ করেন। আলোচনায় ইমানের মৌলিক ধারণা, এর বিভিন্ন স্তর এবং একজন মুমিনের জীবনে ইমানের প্রভাব সুন্দরভাবে তুলে ধরা হয়।
+হালাকায় উপস্থিত মুসল্লীগণ গভীর মনোযোগ সহকারে আলোচনা শ্রবণ করেন এবং তা থেকে উপকৃত হন। আলোচনা শেষে সকল উপস্থিত মুসল্লীদের জন্য আন্তরিক মেহমানদারীর ব্যবস্থা করা হয়, যা আয়োজনটিকে আরও সৌহার্দ্যপূর্ণ ও আনন্দময় করে তোলে।</p>
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImg5" src="https://i.postimg.cc/v8jw76ym/FB_IMG_1775492267319.jpg" alt="Halakah 5">
+                </div>
+                <div class="gallery-thumbs">
+                    <img src="https://i.postimg.cc/v8jw76ym/FB_IMG_1775492267319.jpg" class="active" onclick="changeImg(this, 'mainImg5')">
+                    <img src="https://i.postimg.cc/kMZPNtCg/FB_IMG_1775492255609.jpg" onclick="changeImg(this, 'mainImg5')">
+                    <img src="https://i.postimg.cc/MZ4J0jwT/FB_IMG_1775492253140.jpg" onclick="changeImg(this, 'mainImg5')">
+                    <img src="https://i.postimg.cc/cJvWW41G/received-731472402962660.jpg" onclick="changeImg(this, 'mainImg5')">
+                    <img src="https://i.postimg.cc/FFgTTR7X/received-2029424277515670.jpg" onclick="changeImg(this, 'mainImg5')">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="newsletter-section container">
+        <h2>দ্বীনি কার্যক্রমে আপডেট থাকতে যুক্ত হোন</h2>
+        <div style="display: flex; justify-content: center; margin-top: 15px;">
+            <a href="https://www.facebook.com/share/18EjS1JRBt/" style="background: var(--orange); color: #000; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">ফলো করুন</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo" style="width: 120px; margin-bottom: 20px;">
+                    <p>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন একটি অরাজনৈতিক ও সমাজসেবামূলক প্রতিষ্ঠান। আমরা কোরআন ও সুন্নাহর আলোকে সমাজ বিনির্মাণে কাজ করে যাচ্ছি।</p>
+                </div>
+                <div>
+                    <h4>লিঙ্ক</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="index.html" style="color: #aaa; text-decoration: none;">হোম</a></li>
+                        <li><a href="all work.html" style="color: #aaa; text-decoration: none;">কার্যক্রম</a></li>
+                        <li><a href="https://www.facebook.com/share/1DxbicGFvF/" style="color: #aaa; text-decoration: none;">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>সোশ্যাল মিডিয়া</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <a href="https://www.facebook.com/share/1DxbicGFvF/" style="color: white; font-size: 20px;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://youtube.com/@munna.pabna2k4?si=kYG1sAvLXhE2JG2E" style="color: white; font-size: 20px;"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন - সর্ব স্বত্ব সংরক্ষিত।</div>
+        </div>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "280px";
+            document.getElementById("overlay").style.display = "block";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Gallery Control
+        function changeImg(element, targetMainImgId) {
+            const mainImg = document.getElementById(targetMainImgId);
+            mainImg.style.opacity = "0.3";
+            
+            setTimeout(() => {
+                mainImg.src = element.src;
+                mainImg.style.opacity = "1";
+            }, 150);
+
+            let parentGallery = element.closest('.gallery-container');
+            let thumbs = parentGallery.querySelectorAll(".gallery-thumbs img");
+            thumbs.forEach(img => img.classList.remove("active"));
+            element.classList.add("active");
+        }
+    </script>
+</body>
+</html>

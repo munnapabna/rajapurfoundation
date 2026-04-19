@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sitbostro - রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #00834a;
+            --light-green: #e9f5ef;
+            --orange: #d9a656;
+            --text-color: #333;
+            --bg-gray: #f8f9fa;
+            --footer-dark: #1a1a1a;
+            --newsletter-green: #006b3c;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 0;
+            background-color: #fff;
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar a {
+            padding: 12px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #333;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .sidebar a:hover { background-color: var(--light-green); color: var(--primary-green); }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 36px;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            border-bottom: 1px solid #eee;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo img { height: 50px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .lang-switch { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; display: flex; }
+        .lang-switch span { padding: 5px 10px; cursor: pointer; font-size: 14px; }
+        .lang-switch .active { background: var(--primary-green); color: white; }
+        .btn-donate { background: var(--primary-green); color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .menu-icon { font-size: 24px; cursor: pointer; color: var(--primary-green); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.postimg.cc/qqZxfxQD/1774876142505.png');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 42px; margin-bottom: 10px; }
+        .hero p { max-width: 600px; font-size: 18px; }
+
+        /* Section Title */
+        .section-title {
+            text-align: left;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            border-bottom: 2px solid var(--primary-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Video Section */
+        .video-placeholder {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .video-placeholder img { width: 100%; display: block; }
+
+        /* Info Cards */
+        .info-card {
+            background: #f1f3f4;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .info-card i { color: var(--primary-green); margin-top: 5px; }
+        .info-card h4 { margin: 0; font-size: 16px; color: #555; }
+        .info-card p { margin: 5px 0 0; font-weight: 600; }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: var(--primary-green);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+        }
+        .cta-banner h2 { margin: 0; font-size: 22px; }
+        .cta-btn { background: var(--orange); color: #333; padding: 10px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+
+        /* --- Interactive Gallery --- */
+        .gallery-container { margin: 40px 0; }
+        .gallery-main { width: 100%; margin-bottom: 15px; }
+        .gallery-main img { 
+            width: 100%; 
+            border-radius: 10px; 
+            max-height: 550px; 
+            object-fit: cover;
+            transition: 0.4s ease;
+        }
+        .gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .gallery-thumbs img { 
+            width: 100%; 
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px; 
+            cursor: pointer; 
+            filter: blur(0.5px) grayscale(20%); /* ঝাপসা ইফেক্ট */
+            opacity: 0.3;
+            transition: 0.1s;
+        }
+        .gallery-thumbs img:hover, .gallery-thumbs img.active { 
+            filter: blur(0) grayscale(0); /* ক্লিয়ার হবে */
+            opacity: 8;
+            border: 2px solid var(--primary-green);
+        }
+
+        /* --- Income Expenditure Section --- */
+        .accounts-section { margin-top: 50px; margin-bottom: 50px; }
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .account-box h3 {
+            background: #f1f3f4;
+            padding: 10px;
+            margin: 0;
+            font-size: 18px;
+            border-left: 4px solid var(--primary-green);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        th { color: #666; font-weight: 500; }
+        .amount { text-align: right; font-weight: bold; }
+        .total-row-table { background: #fff8e1; font-weight: bold; }
+
+        /* Impact Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .stat-header { background: var(--light-green); padding: 10px 15px; display: flex; justify-content: space-between; }
+        .stat-body { padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+        
+        .total-row {
+            background: #fff8e1;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .see-more { text-align: center; margin: 20px 0; color: var(--primary-green); cursor: pointer; font-weight: bold; }
+
+        /* Footer */
+        .newsletter-section {
+            background-color: var(--newsletter-green);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 0 20px -80px;
+            position: relative;
+            z-index: 10;
+            color: white;
+        }
+        .subscribe-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .subscribe-form input { flex: 1; border: none; padding: 10px 15px; outline: none; }
+        .subscribe-form button {
+            background-color: var(--orange);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark-footer);
+            color: #d1d1d1;
+            padding: 70px 5% 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo img { width: 140px; margin-bottom: 15px; }
+        .footer-about { font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; position: relative; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #aaa; text-decoration: none; font-size: 15px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+        
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { 
+            width: 35px; height: 35px; background: rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; color: white; text-decoration: none;
+        }
+        .social-icons a:hover { background: var(--primary-green); }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 14px;
+        }
+
+        .chat-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #00a15d;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid, .accounts-grid, .stats-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar & Overlay -->
+    <div id="overlay" onclick="closeNav()"></div>
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> হোম</a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+        <a href="all-work.html"><i class="fa-solid fa-briefcase"></i> সকল কার্যক্রম</a>
+        <a href="#"><i class="fa-solid fa-users"></i> স্বেচ্ছাসেবক</a>
+        <a href="#"><i class="fa-solid fa-image"></i> গ্যালারি</a>
+        <a href="#"><i class="fa-solid fa-envelope"></i> যোগাযোগ</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <div class="lang-switch">
+                <span class="active">বা</span>
+                <span>EN</span>
+            </div>
+            <a href="#" class="btn-donate">দান করুন</a>
+            <i class="fa-solid fa-bars menu-icon" onclick="openNav()"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>শীতবস্ত্র বিতরণ</h1>
+        <p>শীতার্ত মানুষের পাশে রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">কার্যক্রমের বিবরণ</h2>
+        
+        <div class="video-placeholder">
+            <img src="https://i.postimg.cc/ZR9mxtjS/Picsart_26_03_24_22_46_54_465.jpg" alt="Video Thumbnail" style="filter: brightness(0.9);">
+        </div>
+
+        <p>শীতবস্ত্র বিতরণ কার্যক্রম আমাদের সংগঠনের একটি মানবিক উদ্যোগ, যার মাধ্যমে শীতার্ত অসহায় মানুষের পাশে দাঁড়ানোর চেষ্টা করা হয়। শীত মৌসুমে অনেক দরিদ্র ও সুবিধাবঞ্চিত মানুষ প্রয়োজনীয় গরম কাপড়ের অভাবে কষ্ট ভোগ করে—তাদের সেই দুর্ভোগ কিছুটা লাঘব করাই আমাদের এই উদ্যোগের মূল লক্ষ্য।
+এই কার্যক্রমের আওতায় আমরা মোট ১৫ জন অসহায় ও দরিদ্র ব্যক্তির মাঝে শীতবস্ত্র বিতরণ করেছি। তাদের প্রত্যেককে একটি করে কম্বল ও চাদর প্রদান করা হয়, যাতে তারা শীতের তীব্রতা থেকে কিছুটা হলেও স্বস্তি পেতে পারেন। বিতরণের সময় উপকারভোগীদের সম্মান ও মর্যাদা বজায় রেখে সুশৃঙ্খলভাবে কার্যক্রম সম্পন্ন করা হয়।
+এই উদ্যোগ শুধুমাত্র সাহায্য প্রদান নয়, বরং এটি আমাদের মানবিকতা, সহমর্মিতা ও সামাজিক দায়িত্ববোধের প্রতিফলন। আমরা বিশ্বাস করি, সমাজের বিত্তবান ও সচেতন মানুষের সম্মিলিত প্রচেষ্টায় এ ধরনের কার্যক্রম আরও বিস্তৃত করা সম্ভব।
+ভবিষ্যতেও আমরা এই ধরনের মানবিক কার্যক্রম অব্যাহত রাখতে প্রতিশ্রুতিবদ্ধ, যাতে শীতের কষ্টে থাকা আরও বেশি মানুষের পাশে দাঁড়ানো যায় এবং তাদের জীবনে সামান্য হলেও স্বস্তি ও উষ্ণতা পৌঁছে দেওয়া যায়।</p>
+
+        <!-- Info Cards -->
+        <div class="info-card"><i class="fa-solid fa-circle-check"></i><div><h4>প্রকল্পের লক্ষ্য-উদ্দেশ্য</h4><p>শীতার্ত অসহায় মানুষের মাঝে শীতবস্ত্র বিতরণের মাধ্যমে তাদের কষ্ট লাঘব করা</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-users"></i><div><h4>উপকারভোগী</h4><p>অসহায়, দুস্থ ও শীতার্ত পরিবার</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-circle-check"></i><div><h4>ব্যয়ের খাত</h4><p>কম্বল/শীতবস্ত্র ক্রয়, পরিবহন ও ব্যবস্থাপনা ব্যয়</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-location-dot"></i><div><h4>প্রকল্পের এলাকা</h4><p>রাজাপুর উত্তর পাড়া ও আশেপাশের এলাকা</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-calendar-days"></i><div><h4>মেয়াদ</h4><p>শীত মৌসুম ভিত্তিক (নভেম্বর – জানুয়ারি)</p></div></div>
+
+        <div class="cta-banner">
+            <h2>শীতার্ত পরিবারের পাশে দাঁড়ান</h2>
+            <a href="#" class="cta-btn">দান করুন</a>
+        </div>
+
+        <!-- Interactive Gallery Section -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none;">গ্যালারি</h2>
+        <div class="gallery-container">
+            <div class="gallery-main">
+                <img id="mainImg" src="https://i.postimg.cc/qqZxfxQD/1774876142505.png" alt="Gallery Main">
+            </div>
+           <div class="gallery-thumbs">
+                <img src="https://i.postimg.cc/qqZxfxQD/1774876142505.png" class="active" onclick="changeImg(this)">
+                <img src="https://i.postimg.cc/B683B9Nf/FB_IMG_1774370703700.jpg" onclick="changeImg(this)">
+                <img src="https://i.postimg.cc/ZR9mxtjS/Picsart_26_03_24_22_46_54_465.jpg" onclick="changeImg(this)">
+                <img src="https://i.postimg.cc/sxRLQtNk/received-1207203644694542.jpg" onclick="changeImg(this)">
+          
+          
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none; margin-top: 50px;">ইমপ্যাক্ট পরিসংখ্যান</h2>
+        <di class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header"><span>সাল</span><span style="color:var(--primary-green)">২০২৫</span></div>
+                <div class="stat-body"><span>শীতবস্ত্রের সংখ্যা</span><span>১২</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header"><span>সাল</span><span style="color:var(--primary-green)">২০২৪</span></div>
+                <div class="stat-body"><span>শীতবস্ত্রের সংখ্যা</span><span>৫</span></div>
+            </div>
+          
+        </div>
+        <div class="total-row"><span>মোট</span><span style="color: var(--primary-green);">১৭</span></div>
+</div>
+        <!-- Accounts -->
+        <h2 class="section-title">আয় ব্যয় হিসাব</h2>
+        <div class="see-more">শীতবস্ত্র বিতরণীর আয় ব্যয় হিসাব</div>
+        
+        <div class="accounts-section">
+            <div class="accounts-grid">
+                <div class="account-box">
+                    <h3>আয় হিসাব (অর্থ দাতা)</h3>
+                    <table>
+                        <thead><tr><th>দাতার নাম/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>জাহিদ</td><td class="amount">১০০০</td></tr>
+                            <tr><td>সুমন কাক্কু </td><td class="amount">৮০০</td></tr>
+                           <tr><td>কাওসার</td><td class="amount">৫০০</td></tr>
+                            <tr><td>জিসান</td><td class="amount">১০০০</td></tr>
+                            <tr><td>সানভির</td><td class="amount">২০০</td></tr>
+                            <tr><td>তুহিন</td><td class="amount">২০০</td></tr>
+                            <tr><td>তানভীর</td><td class="amount">৫১</td></tr>
+                            <tr><td>পারভেজ</td><td class="amount">১৪০</td></tr>
+                            <tr><td>মাসুদ স্যার</td><td class="amount">২০০</td></tr>
+                            <tr><td>বর্ষন</td><td class="amount">২৪০</td></tr>
+                            <tr><td>রিয়া আপা</td><td class="amount">৫০</td></tr>
+                            <tr><td>মাসুম</td><td class="amount">২০০</td></tr>
+                            <tr><td>অজানা ব্যাক্তি</td><td class="amount">১০০</td></tr>
+                            <tr><td>মিঠন</td><td class="amount">৩০০</td></tr>
+                            <tr><td>নাম বলতে অনিচ্ছুক</td><td class="amount">১৯</td></tr>
+                       
+                            <tr class="total-row-table"><td>মোট আয়</td><td class="amount">৫০০০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="account-box">
+                    <h3>ব্যয় হিসাব (খরচ)</h3>
+                    <table>
+                        <thead><tr><th>খাত/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>বড় কম্বল</td><td class="amount">২১৫০</td></tr>
+                           <tr><td>ছোট কম্বল</td><td class="amount">৭০০</td></tr>
+                            <tr><td>চাদর</td><td class="amount">২৫২০</td></tr>
+                          
+                           <tr class="total-row-table"><td>মোট ব্যয়</td><td class="amount">৫৩৭০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="newsletter-section container">
+        <h2>নিয়মিত নিউজলেটার পেতে ফলো করুন</h2>
+        <div class="subscribe-form">
+            <input type="email" placeholder="রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন">
+         <a ref="https://wwwfacebook.com/share/18EjS1JRBt/"   <button type="button">ফলো করুন</button></a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo White">
+                    </div>
+                    <p class="footer-about">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন মানবতার শিক্ষক, মানুষের মুক্তি ও শান্তির দূত, মানবসেবার আদর্শ, মহানবী মুহাম্মদ সা.-এর পদাঙ্ক অনুসরণ করে আর্তমানবতার সেবায় একটি আদর্শ কল্যাণসমাজ বিনির্মাণে যথশক্তি প্রচেষ্টা চালিয়ে যাচ্ছে।</p>
+                </div>
+                <div class="footer-col">
+                    <h4>মেনু</h4>
+                    <ul>
+                        <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+                        <li><a href="all work.html">কার্যক্রমসমূহ</a></li>
+                        <li><a href="#">ব্লগ</a></li>
+                        <li><a href="#">গ্যালারি</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>যুক্ত হোন</h4>
+                    <ul>
+                        <li><a href="#">নিয়মিত দাতা সদস্য</a></li>
+                        <li><a href="#">আজীবন ও দাতা সদস্য</a></li>
+                        <li><a href="#">স্বেচ্ছাসেবক</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>অন্যান্য</h4>
+                    <ul>
+                        <li><a href="#">যোগাযোগ</a></li>
+                        <li><a href="#">পরিষেবার শর্তাবলী</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1CS6Wnk5Yx/"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@munna.pabna2k4?si=1zjbpA3820buyAq0"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন - সর্ব স্বত্ব সংরক্ষিত।</div>
+        </div>
+    </footer>
+
+    <div class="chat-btn"><i class="fa-solid fa-comment-dots"></i></div>
+
+    <script>
+        // Sidebar Controls
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "280px";
+            document.getElementById("overlay").style.display = "block";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Gallery Control
+        function changeImg(element) {
+            // Change main image source
+            const mainImg = document.getElementById("mainImg");
+            mainImg.style.opacity = "0"; // Smooth fade out
+            
+            setTimeout(() => {
+                mainImg.src = element.src;
+                mainImg.style.opacity = "1"; // Fade in
+            }, 200);
+
+            // Update active state in thumbnails
+            let thumbs = document.querySelectorAll(".gallery-thumbs img");
+            thumbs.forEach(img => img.classList.remove("active"));
+            element.classList.add("active");
+        }
+    </script>
+</body>
+</html>

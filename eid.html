@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid - রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #00834a;
+            --light-green: #e9f5ef;
+            --orange: #d9a656;
+            --text-color: #333;
+            --bg-gray: #f8f9fa;
+            --footer-dark: #1a1a1a;
+            --newsletter-green: #006b3c;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 0;
+            background-color: #fff;
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar a {
+            padding: 12px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #333;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .sidebar a:hover { background-color: var(--light-green); color: var(--primary-green); }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 36px;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            border-bottom: 1px solid #eee;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo img { height: 50px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .lang-switch { border: 1px solid #ccc; border-radius: 5px; overflow: hidden; display: flex; }
+        .lang-switch span { padding: 5px 10px; cursor: pointer; font-size: 14px; }
+        .lang-switch .active { background: var(--primary-green); color: white; }
+        .btn-donate { background: var(--primary-green); color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .menu-icon { font-size: 24px; cursor: pointer; color: var(--primary-green); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.postimg.cc/hvhTmcJP/IMG-20260317-222227372.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 42px; margin-bottom: 10px; }
+        .hero p { max-width: 600px; font-size: 18px; }
+
+        /* Section Title */
+        .section-title {
+            text-align: left;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            border-bottom: 2px solid var(--primary-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Video Section */
+        .video-placeholder {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .video-placeholder img { width: 100%; display: block; }
+
+        /* Info Cards */
+        .info-card {
+            background: #f1f3f4;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .info-card i { color: var(--primary-green); margin-top: 5px; }
+        .info-card h4 { margin: 0; font-size: 16px; color: #555; }
+        .info-card p { margin: 5px 0 0; font-weight: 600; }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: var(--primary-green);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+        }
+        .cta-banner h2 { margin: 0; font-size: 22px; }
+        .cta-btn { background: var(--orange); color: #333; padding: 10px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+
+        /* --- Interactive Gallery --- */
+        .gallery-container { margin: 40px 0; }
+        .gallery-main { width: 100%; margin-bottom: 15px; }
+        .gallery-main img { 
+            width: 100%; 
+            border-radius: 10px; 
+            max-height: 550px; 
+            object-fit: cover;
+            transition: 0.4s ease;
+        }
+        .gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .gallery-thumbs img { 
+            width: 100%; 
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px; 
+            cursor: pointer; 
+            filter: blur(0.5px) grayscale(20%);
+            opacity: 0.3;
+            transition: 0.1s;
+        }
+        .gallery-thumbs img:hover, .gallery-thumbs img.active { 
+            filter: blur(0) grayscale(0);
+            opacity: 1;
+            border: 2px solid var(--primary-green);
+        }
+
+        /* --- Income Expenditure Section --- */
+        .accounts-section { margin-top: 50px; margin-bottom: 50px; }
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .account-box h3 {
+            background: #f1f3f4;
+            padding: 10px;
+            margin: 0;
+            font-size: 18px;
+            border-left: 4px solid var(--primary-green);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        th { color: #666; font-weight: 500; }
+        .amount { text-align: right; font-weight: bold; }
+        .total-row-table { background: #fff8e1; font-weight: bold; }
+
+        /* Impact Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .stat-header { background: var(--light-green); padding: 10px 15px; display: flex; justify-content: space-between; }
+        .stat-body { padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+        
+        .total-row {
+            background: #fff8e1;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .see-more { text-align: center; margin: 20px 0; color: var(--primary-green); cursor: pointer; font-weight: bold; }
+
+        /* Footer */
+        .newsletter-section {
+            background-color: var(--newsletter-green);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 0 20px -80px;
+            position: relative;
+            z-index: 10;
+            color: white;
+        }
+        .subscribe-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .subscribe-form input { flex: 1; border: none; padding: 10px 15px; outline: none; }
+        .subscribe-form button {
+            background-color: var(--orange);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark-footer);
+            color: #d1d1d1;
+            padding: 70px 5% 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo img { width: 140px; margin-bottom: 15px; }
+        .footer-about { font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; position: relative; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #aaa; text-decoration: none; font-size: 15px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+        
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { 
+            width: 35px; height: 35px; background: rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; color: white; text-decoration: none;
+        }
+        .social-icons a:hover { background: var(--primary-green); }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 14px;
+        }
+
+        .chat-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #00a15d;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid, .accounts-grid, .stats-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar & Overlay -->
+    <div id="overlay" onclick="closeNav()"></div>
+    <div id="mySidebar" class="sidebar">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <a href="index.html"><i class="fa-solid fa-house"></i> হোম</a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a>
+        <a href="all work.html"><i class="fa-solid fa-briefcase"></i> সকল কার্যক্রম</a>
+        <a href="member.html"><i class="fa-solid fa-users"></i> সকল সদস্য</a>
+        <a href="https://www.facebook.com/share/18RibWS97Z/"><i class="fa-solid fa-envelope"></i> যোগাযোগ</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <div class="lang-switch">
+          
+            </div>
+            <a href="https://www.facebook.com/share/1AyXMqdTCB/" class="btn-donate">ফলো করুন</a>
+            <i class="fa-solid fa-bars menu-icon" onclick="openNav()"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>ঈদ সামগ্রী বিতরণ</h1>
+        <p>আপনার সহযোগিতায় আমরা দুঃস্থ অসহায় মানুষের মাঝে ঈদ সামগ্রী বিতরণ করে থাকি। আমাদের এই কল্যাণকর্মে আপনিও শরিক হোন।</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">কার্যক্রমের বিবরণ</h2>
+        
+        <div class="video-placeholder">
+            <img src="https://i.postimg.cc/VkzM9q0R/Picsart-26-03-24-20-02-04-766.jpg" alt="Video Thumbnail" style="filter: brightness(0.9);">
+        </div>
+
+        <p>আমাদের সংগঠন গত দুই বছর ধরে ধারাবাহিকভাবে অসহায় ও সুবিধাবঞ্চিত মানুষের পাশে দাঁড়িয়ে ইদ উপহার সামগ্রী বিতরণ কার্যক্রম পরিচালনা করে আসছে। পবিত্র ঈদুল ফিতর উপলক্ষে সমাজের নিম্নআয়ের পরিবারগুলোর মাঝে আনন্দ ভাগাভাগি করে নেওয়ার লক্ষ্যেই এই উদ্যোগ গ্রহণ করা হয়। আমরা বিশ্বাস করি, ঈদের প্রকৃত আনন্দ তখনই পরিপূর্ণতা পায় যখন সমাজের প্রতিটি মানুষ সেই আনন্দে অংশগ্রহণ করতে পারে। প্রতি বছরই আমাদের স্বেচ্ছাসেবকরা নিরলস পরিশ্রমের মাধ্যমে উপকারভোগীদের একটি তালিকা প্রস্তুত করে, যাতে প্রকৃতভাবে অভাবগ্রস্ত পরিবারগুলোকে অগ্রাধিকার দেওয়া যায়। এরপর সুষ্ঠু পরিকল্পনা ও স্বচ্ছ ব্যবস্থাপনার মাধ্যমে চাল, ডাল, তেল, চিনি, সেমাইসহ নিত্যপ্রয়োজনীয় বিভিন্ন খাদ্যসামগ্রী প্যাকেজ আকারে প্রস্তুত করা হয়। বিতরণের সময় আমরা সর্বোচ্চ সম্মান ও মর্যাদা বজায় রাখার চেষ্টা করি, যাতে কোনো উপকারভোগী নিজেকে ছোট মনে না করেন। এই কার্যক্রম শুধু উপহার বিতরণের মধ্যেই সীমাবদ্ধ নয়; এটি আমাদের ভালোবাসা, সহমর্মিতা ও মানবিক দায়িত্ববোধের একটি প্রতিফলন। স্থানীয় সমাজের বিভিন্ন স্তরের মানুষের সহযোগিতা এবং দানশীল ব্যক্তিদের অবদানে আমাদের এই উদ্যোগ ক্রমেই আরও বিস্তৃত হচ্ছে। আমরা ভবিষ্যতেও এই কার্যক্রমকে আরও বড় পরিসরে পরিচালনা করার প্রত্যয় ব্যক্ত করছি, যেন আরও বেশি মানুষের মুখে হাসি ফোটানো যায়। আমাদের এই ক্ষুদ্র প্রয়াসের মাধ্যমে আমরা একটি সহানুভূতিশীল ও মানবিক সমাজ গড়ে তুলতে চাই, যেখানে কেউ ঈদের আনন্দ থেকে বঞ্চিত থাকবে না। আপনার সহযোগিতা ও দোয়া আমাদের এই পথচলাকে আরও শক্তিশালী করবে—এটাই আমাদের প্রত্যাশা।</p>
+
+        <!-- Info Cards -->
+        <div class="info-card"><i class="fa-solid fa-circle-check"></i><div><h4>প্রকল্পের লক্ষ্য-উদ্দেশ্য</h4><p>অভাবী পরিবারকে ইদ সামগ্রীর ব্যবস্থা করা</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-users"></i><div><h4>উপকারভোগী</h4><p>এতিম,বিধবা ও দরিদ্র পরিবার</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-circle-check"></i><div><h4>ব্যয়ের খাত</h4><p>ইদ সামগ্রী ক্রয় ও ব্যবস্থাপনা ব্যয়</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-location-dot"></i><div><h4>প্রকল্পের এলাকা</h4><p>রাজাপুর উত্তর পাড়া ও আশেপাশের এলাকা</p></div></div>
+        <div class="info-card"><i class="fa-solid fa-calendar-days"></i><div><h4>মেয়াদ</h4><p>বার্ষিক এবং স্থায়ী প্রকল্প (ইদ কেন্দ্রিক)</p></div></div>
+
+        <div class="cta-banner">
+            <h2>দুস্থ পরিবারের পাশে দাঁড়ান</h2>
+            <a href="#" class="cta-btn">দান করুন</a>
+        </div>
+
+        <!-- Interactive Gallery Section 1 -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none;">গ্যালারি (ইদুল ফিতর ২০২৬)</h2>
+        <div class="gallery-container">
+            <div class="gallery-main">
+                <img id="mainImg2026F" src="https://i.postimg.cc/hvhTmcJP/IMG_20260317_222227372.jpg" alt="Gallery Main">
+            </div>
+            <div class="gallery-thumbs">
+                <img src="https://i.postimg.cc/hvhTmcJP/IMG_20260317_222227372.jpg" class="active" onclick="changeImg(this, 'mainImg2026F')">
+                <img src="https://i.postimg.cc/nr401420/Video_Capture_20260318_050108.jpg" onclick="changeImg(this, 'mainImg2026F')">
+                <img src="https://i.postimg.cc/1XGJKGBv/Video_Capture_20260318_050040.jpg" onclick="changeImg(this, 'mainImg2026F')">
+                <img src="https://i.postimg.cc/VvqDFqgR/Video_Capture_20260318_050020.jpg" onclick="changeImg(this, 'mainImg2026F')">
+                <img src="https://i.postimg.cc/NGmJYttf/20260318_101620.jpg" onclick="changeImg(this, 'mainImg2026F')">
+            </div>
+        </div>
+
+        <!-- Interactive Gallery Section 2 -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none;">গ্যালারি (ইদুল আজহা ২০২৫)</h2>
+        <div class="gallery-container">
+            <div class="gallery-main">
+                <img id="mainImg2025A" src="https://i.postimg.cc/YSj7y9J4/FB_IMG_1775149114381.jpg" alt="Gallery Main">
+            </div>
+            <div class="gallery-thumbs">
+                <img src="https://i.postimg.cc/YSj7y9J4/FB_IMG_1775149114381.jpg" class="active" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/d0DFS1zT/FB_IMG_1775149117709.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/5yWM0mjt/FB_IMG_1775149126997.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/43nGFdrc/FB_IMG_1775149129818.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/g0rpBJfs/FB_IMG_1775149132281.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/zf3NPB9T/FB_IMG_1775149121139.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/XvhWMWbs/FB_IMG_1775149144182.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/vmjyRysk/FB_IMG_1775149149064.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/jj9TVTTb/FB_IMG_1775149155042.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/FRL4N6FX/FB_IMG_1775149160439.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/V6C8mhs1/FB_IMG_1775149168580.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/C1qgS2MK/FB_IMG_1775149177629.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/wB3zbvSw/FB_IMG_177519135895.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/TPSx8x6c/FB_IMG_1775149138916.jpg" onclick="changeImg(this, 'mainImg2025A')">
+                <img src="https://i.postimg.cc/NGmJYttF/FB_IMG_1774359752472.jpg" onclick="changeImg(this, 'mainImg2025A')">
+            </div>
+        </div>
+
+        <!-- Interactive Gallery Section 3 -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none;">গ্যালারি (ইদুল ফিতর ২০২৫)</h2>
+        <div class="gallery-container">
+            <div class="gallery-main">
+                <img id="mainImg2025F" src="https://i.postimg.cc/zDKt5NNz/FB_IMG_1774359750026.jpg" alt="Gallery Main">
+            </div>
+            <div class="gallery-thumbs">
+                <img src="https://i.postimg.cc/zDKt5NNz/FB_IMG_1774359750026.jpg" class="active" onclick="changeImg(this, 'mainImg2025F')">
+                <img src="https://i.postimg.cc/ryxncTT8/FB_IMG_1774359747430.jpg" onclick="changeImg(this, 'mainImg2025F')">
+                <img src="https://i.postimg.cc/FF3Wmvvm/FB_IMG_1774359745169.jpg" onclick="changeImg(this, 'mainImg2025F')">
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <h2 class="section-title" style="display: block; text-align: center; border: none; margin-top: 50px;">ইমপ্যাক্ট পরিসংখ্যান</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header"><span>সাল</span><span style="color:var(--primary-green)">ঈদুল ফিতর ২০২৬</span></div>
+                <div class="stat-body"><span>প্যাকেজ সংখ্যা</span><span>৬২</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header"><span>সাল</span><span style="color:var(--primary-green)">ইদুল আজহা ২০২৫</span></div>
+                <div class="stat-body"><span>প্যাকেজ সংখ্যা</span><span>৪০</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header"><span>সাল</span><span style="color:var(--primary-green)">ইদুল ফিতর ২০২৫</span></div>
+                <div class="stat-body"><span>প্যাকেজ সংখ্যা</span><span>৩০</span></div>
+            </div>
+        </div>
+        <div class="total-row"><span>মোট</span><span style="color: var(--primary-green);">১৩২</span></div>
+
+        <!-- Accounts -->
+        <h2 class="section-title">আয় ব্যয় হিসাব</h2>
+        <div class="see-more">সর্বশেষ ইদ সামগ্রী বিতরণের আয় ব্যয় হিসাব</div>
+        
+        <div class="accounts-section">
+            <div class="accounts-grid">
+                <div class="account-box">
+                    <h3>আয় হিসাব (অর্থ দাতা)</h3>
+                    <table>
+                        <thead><tr><th>দাতার নাম/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>নাম প্রকাশে অনিচ্ছুক</td><td class="amount">৩,০৬০</td></tr>
+                            <tr><td>আবুল স্যার</td><td class="amount">৫,০০০</td></tr>
+                            <tr><td>মোঃ রানা</td><td class="amount">১৫০০</td></tr>
+                            <tr><td>ইব্রাহিম</td><td class="amount">১০০০</td></tr>
+                            <tr><td>নাসির</td><td class="amount">১০০০</td></tr>
+                            <tr><td>রনি</td><td class="amount">১০০০</td></tr>
+                            <tr><td>সম্রাট</td><td class="amount">১০০০</td></tr>
+                            <tr><td>সজিব</td><td class="amount">৫১০</td></tr>
+                            <tr><td>শিপর (রুবেল)</td><td class="amount">৫০০</td></tr>
+                            <tr><td>সানোয়ার</td><td class="amount">৫০০</td></tr>
+                            <tr><td>জিসান</td><td class="amount">৫০০</td></tr>
+                            <tr><td>মাহফুজ</td><td class="amount">৫০০</td></tr>
+                            <tr><td>শাহাদাত </td><td class="amount">৫০০</td></tr>
+                            <tr><td>মিজান</td><td class="amount">৫০০</td></tr>
+                            <tr><td>ফারুক</td><td class="amount">৫০০</td></tr>
+                            <tr><td>নাম প্রকাশে অনিচ্ছুক</td><td class="amount">৫০০</td></tr>
+                            <tr><td>মাসুম</td><td class="amount">৪০০</td></tr>
+                            <tr><td>দেলোয়ার </td><td class="amount">৩০০</td></tr>
+                            <tr><td>হাফিজুল</td><td class="amount">২০০</td></tr>
+                            <tr><td>জয়</td><td class="amount">২০০</td></tr>
+                            <tr><td>ইয়াস</td><td class="amount">২০০</td></tr>
+                            <tr><td>আসিফ</td><td class="amount">২০০</td></tr>
+                            <tr><td>বাবু ভাই</td><td class="amount">৩০০</td></tr>
+                            <tr><td>আরিফুল</td><td class="amount">১৫০</td></tr>
+                            <tr><td>জিদান</td><td class="amount">৩০০</td></tr>
+                            <tr><td>সুমন কাক্কু</td><td class="amount">৩০০</td></tr>
+                            <tr><td>রফিকুল</td><td class="amount">১০০</td></tr>
+                            <tr><td>সাকিব</td><td class="amount">১০০</td></tr>
+                            <tr><td>হাসান</td><td class="amount">১০০</td></tr>
+                            <tr><td>সিজন</td><td class="amount">১০০</td></tr>
+                            <tr><td>মিজান স্যার</td><td class="amount">১৫০</td></tr>
+                            <tr><td>জলিল ভাই</td><td class="amount">১০০</td></tr>
+                            <tr><td>সুমন ভাই</td><td class="amount">৫০০</td></tr>
+                            <tr><td>শিপন (সায়েম)</td><td class="amount">৫০০</td></tr>
+                            <tr class="total-row-table"><td>মোট আয়</td><td class="amount">২২,২৭০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="account-box">
+                    <h3>ব্যয় হিসাব (খরচ)</h3>
+                    <table>
+                        <thead><tr><th>খাত/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>চিনি</td><td class="amount">৩০০০</td></tr>
+                            <tr><td>তেল</td><td class="amount">৬০০০</td></tr>
+                            <tr><td>সাবান</td><td class="amount">৫৪০</td></tr>
+                            <tr><td>শ্যাম্পো</td><td class="amount">৫৭০</td></tr>
+                            <tr><td>লাচ্চা সেমাই </td><td class="amount">২৬৪০</td></tr>
+                            <tr><td>মসলা</td><td class="amount">৩০১০</td></tr>
+                            <tr><td>লবন</td><td class="amount">১১১০</td></tr>
+                            <tr><td>কাঠি সেমাই </td><td class="amount">৫৪০</td></tr>
+                            <tr><td>আলু</td><td class="amount">১১২০</td></tr>
+                            <tr><td>পেয়াজ</td><td class="amount">১৯২০</td></tr>
+                            <tr><td>ব্যাগ</td><td class="amount">৩০০</td></tr>
+                            <tr><td>পলিথিন</td><td class="amount">১০০</td></tr>
+                            <tr><td>কুলি</td><td class="amount">৪০</td></tr>
+                            <tr><td>পরিবহন খরচ</td><td class="amount">১৮০</td></tr>
+                            <tr><td>পরবর্তীতে ২ টা প্যাকেজ যুক্ত করা হয়</td><td class="amount">১০০০</td></tr>
+                            <tr class="total-row-table"><td>মোট ব্যয়</td><td class="amount">২২০৭০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="newsletter-section container">
+        <h2>নিয়মিত নিউজলেটার পেতে ফলো করুন</h2>
+        <div class="subscribe-form">
+            <input type="email" placeholder="রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন">
+            <a href="https://www.facebook.com/share/18EjS1JRBt/"><button type="button">ফলো করুন</button></a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo White">
+                    </div>
+                    <p class="footer-about">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন মানবতার শিক্ষক, মানুষের মুক্তি ও শান্তির দূত, মানবসেবার আদর্শ, মহানবী মুহাম্মদ সা.-এর পদাঙ্ক অনুসরণ করে আর্তমানবতার সেবায় একটি আদর্শ কল্যাণসমাজ বিনির্মাণে যথশক্তি প্রচেষ্টা চালিয়ে যাচ্ছে।</p>
+                </div>
+                <div class="footer-col">
+                    <h4>মেনু</h4>
+                    <ul>
+                        <li><a href="about.html">আমাদের সম্পর্কে</a></li>
+                        <li><a href="all work.html">কার্যক্রমসমূহ</a></li>
+                     
+                        
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>যুক্ত হোন</h4>
+                    <ul>
+                        <li><a href="#">নিয়মিত দাতা সদস্য</a></li>
+                        <li><a href="#">আজীবন ও দাতা সদস্য</a></li>
+                        <li><a href="#">স্বেচ্ছাসেবক</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>অন্যান্য</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/share/18RibWS97Z/">যোগাযোগ</a></li>
+                        <li><a href="#">পরিষেবার শর্তাবলী</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/1CS6Wnk5Yx/"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://youtube.com/@munna.pabna2k4?si=1zjbpA3820buyAq0"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন - সর্ব স্বত্ব সংরক্ষিত।</div>
+        </div>
+    </footer>
+
+    <div class="chat-btn"><i class="fa-solid fa-comment-dots"></i></div>
+
+    <script>
+        // Sidebar Controls
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "280px";
+            document.getElementById("overlay").style.display = "block";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Improved Gallery Control for multiple galleries
+        function changeImg(element, targetMainImgId) {
+            // Change main image source
+            const mainImg = document.getElementById(targetMainImgId);
+            mainImg.style.opacity = "0"; // Smooth fade out
+            
+            setTimeout(() => {
+                mainImg.src = element.src;
+                mainImg.style.opacity = "1"; // Fade in
+            }, 200);
+
+            // Update active state in thumbnails specifically for the parent gallery
+            let parentGallery = element.closest('.gallery-container');
+            let thumbs = parentGallery.querySelectorAll(".gallery-thumbs img");
+            thumbs.forEach(img => img.classList.remove("active"));
+            element.classList.add("active");
+        }
+    </script>
+</body>
+</html>
