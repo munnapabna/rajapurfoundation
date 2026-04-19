@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts: Hind Siliguri -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #008e48;
+            --light-green-bg: #b5e2cc;
+            --card-bg: #f2f5f4;
+            --text-dark: #333;
+            --white: #ffffff;
+            --gray-text: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-dark);
+            padding-bottom: 50px;
+        }
+
+        /* --- Header Styles --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .donate-btn {
+            background: var(--primary-green);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* --- Side Menu Styles --- */
+        .side-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 2000;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 2001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s ease;
+            padding: 20px;
+        }
+
+        .side-menu.active {
+            right: 0;
+        }
+
+        .close-btn {
+            font-size: 30px;
+            color: #ff0000;
+            cursor: pointer;
+            text-align: right;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: 0.3s;
+        }
+
+        .side-nav-links a:hover {
+            color: var(--primary-green);
+            background: #f9f9f9;
+            padding-left: 15px;
+        }
+
+        /* --- Common Container --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin: 40px 0 25px;
+            color: #222;
+        }
+
+        /* --- Content Card (Grey Background) --- */
+        .policy-card {
+            background-color: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .check-circle {
+            background-color: var(--primary-green);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            font-size: 10px;
+        }
+
+        /* --- Tab Component Design --- */
+        .tabs-wrapper {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        .tab-btn span:first-child {
+            font-size: 24px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--light-green-bg);
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .tab-content-area {
+            padding: 35px;
+            min-height: 250px;
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeInEffect 0.5s ease-in-out;
+        }
+
+        @keyframes fadeInEffect {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Button */
+        .chat-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary-green);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,142,72,0.3);
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            h2 { font-size: 24px; }
+            .tab-btn span { font-size: 14px; }
+            .tab-content-area { padding: 20px; }
+            .logo-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Side Menu Overlay and Box -->
+    <div class="side-menu-overlay" id="menuOverlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <span class="close-btn" id="closeMenu">&times;</span>
+        <nav class="side-nav-links">
+            <a href="index.html">হোম</a>
+            <a href="about.html">আমাদের সম্পর্কে</a>
+            <a href="all work.html">সকল কার্যক্রম</a>
+            <a href="member.html">সদস্য পরিচয়</a>
+       </nav>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-text">রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</div>
+        <div class="nav-right">
+            <a href="https://www.facebook.com/share/18gdrN5ejZ/" class="donate-btn">ফলো</a>
+            <div style="font-size: 28px; cursor: pointer; color: var(--primary-green);" id="openMenu">☰</div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Section: Principles -->
+        <h2>নীতি ও আদর্শ</h2>
+        <div class="policy-card">
+            <ul>
+                <li><span class="check-circle">✓</span> পবিত্র কুরআন ও আল্লাহর রাসূল (সা.)-এর সুন্নাহ তথা কর্মনীতিই রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশনের মূল আদর্শ।</li>
+                <li><span class="check-circle">✓</span> কুরআন ও সুন্নাহভিত্তিক মধ্যমপন্থা অবলম্বন করা আমাদের নীতি।</li>
+                <li><span class="check-circle">✓</span> উম্মাহর ঐক্য, সংহতি ও পারস্পরিক ভ্রাতৃত্বের নীতি মেনে চলা।</li>
+                <li><span class="check-circle">✓</span> ইসলামের দাওয়াহ ক্ষেত্রে উগ্রতা পরিহার করে উদারতা অবলম্বন করা।</li>
+                <li><span class="check-circle">✓</span> স্বচ্ছতা, জবাবদিহিতা ও আমানতদারিতার সাথে কাজ পরিচালনা।</li>
+                <li><span class="check-circle">✓</span> আল্লাহর সৃষ্টির প্রতি সহানুভূতিশীল হওয়া এবং মানুষের কল্যাণে কাজ করাকে আল্লাহর সন্তুষ্টির মাধ্যম হিসেবে দেখা।</li> 
+                <li><span class="check-circle">✓</span> সেবা কার্যক্রমের ক্ষেত্রে দরিদ্র, অসহায়, এতিম, বিধবা এবং দুর্যোগ কবলিত মানুষকে অগ্রাধিকার দেওয়া।</li> 
+            </ul>
+        </div>
+
+        <!-- Section: Goals (Interactive Tabs) -->
+        <h2>লক্ষ্য-উদ্দেশ্য</h2>
+        <div class="tabs-wrapper">
+            <div class="tabs-header">
+                <div class="tab-btn active" onclick="switchTab('goals', 'shikkha', this)">
+                    <span>🎓</span><span>শিক্ষা</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('goals', 'dawah', this)">
+                    <span>📢</span><span>দাওয়াহ</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('goals', 'sheba', this)">
+                    <span>❤️</span><span>সেবা</span>
+                </div>
+            </div>
+            <div class="tab-content-area" id="goals-content">
+                <div class="fade-in">
+                    <ul>
+                        <li><span class="check-circle">✓</span> কুরআন ও সুন্নাহভিত্তিক বিশুদ্ধ ইসলামী জ্ঞানের প্রসার।</li>
+                        <li><span class="check-circle">✓</span> দরিদ্র ও অসচ্ছল মেধাবী শিক্ষার্থীদের শিক্ষাবৃত্তি, শিক্ষা উপকরণ প্রদান ও সহায়ক কার্যক্রম পরিচালনা।</li>
+                        <li><span class="check-circle">✓</span> জাতীয় ও আন্তর্জাতিক পর্যায়ে যোগ্য ইসলামী দা‘য়ী তৈরি করা।</li>
+                        <li><span class="check-circle">✓</span> শিক্ষা, সংস্কৃতি ও নানা সামাজিক ও জীবনমুখী বিষয়ের ওপর প্রতিযোগিতার আয়োজন।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Finance (Interactive Tabs) -->
+        <h2 style="margin-top: 60px;">আয়-ব্যয়ের নীতিমালা</h2>
+        <div class="tabs-wrapper">
+            <div class="tabs-header">
+                <div class="tab-btn active" onclick="switchTab('finance', 'utsho', this)">
+                    <span>💰</span><span>আয়ের উৎস</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('finance', 'sheba_exp', this)">
+                    <span>🤝</span><span>সেবামূলক ব্যয়</span>
+                </div>
+                <div class="tab-btn" onclick="switchTab('finance', 'admin_exp', this)">
+                    <span>📊</span><span>ব্যবস্থাপনা ব্যয়</span>
+                </div>
+            </div>
+            <div class="tab-content-area" id="finance-content">
+                <div class="fade-in">
+                    <ul>
+                        <li><span class="check-circle">✓</span> প্রবাসীদের থেকে প্রাপ্ত স্বেচ্ছাসেবী অনুদান।</li>
+                        <li><span class="check-circle">✓</span> সদস্য ও শুভাকাঙ্ক্ষীদের নিয়মিত ও এককালীন সাহায্য।</li>
+                        <li><span class="check-circle">✓</span> নির্দিষ্ট প্রকল্পের জন্য সংগৃহীত তহবিল।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Chat Button -->
+    <div class="chat-btn">💬</div>
+
+    <script>
+        // মেনু স্ক্রিপ্ট
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        openMenu.addEventListener('click', () => {
+            sideMenu.classList.add('active');
+            menuOverlay.style.display = 'block';
+        });
+
+        const hideMenu = () => {
+            sideMenu.classList.remove('active');
+            menuOverlay.style.display = 'none';
+        };
+
+        closeMenu.addEventListener('click', hideMenu);
+        menuOverlay.addEventListener('click', hideMenu);
+
+        // ডাটাসমূহ (Content Data)
+        const contents = {
+            goals: {
+                shikkha: `<ul>
+                    <li><span class="check-circle">✓</span> কুরআন ও সুন্নাহভিত্তিক বিশুদ্ধ ইসলামী জ্ঞানের প্রসার।</li>
+                    <li><span class="check-circle">✓</span> দরিদ্র ও অসচ্ছল মেধাবী শিক্ষার্থীদের শিক্ষাবৃত্তি, শিক্ষা উপকরণ প্রদান ও সহায়ক কার্যক্রম পরিচালনা</li>
+                    <li><span class="check-circle">✓</span> জাতীয় ও আন্তর্জাতিক পর্যায়ে যোগ্য ইসলামী দা‘য়ী তৈরি করা।</li>
+                    <li><span class="check-circle">✓</span> শিক্ষা, সংস্কৃতি ও নানা সামাজিক ও জীবনমুখী বিষয়ের ওপর প্রতিযোগিতার আয়োজন।</li>
+                </ul>`,
+                dawah: `<ul>
+                    <li><span class="check-circle">✓</span> কুরআন ও সুন্নাহর আলোকে একত্ববাদ প্রতিষ্ঠা।</li>
+                    <li><span class="check-circle">✓</span> শিরক-বিদআত এবং প্রান্তিকতা দূরকরণে দাওয়াহ কার্যক্রম পরিচালনা।</li>
+                    <li><span class="check-circle">✓</span> সুপরিকল্পিত দাওয়াতি কার্যক্রমের মাধ্যমে আদর্শ সমাজ গঠন।</li>
+                    <li><span class="check-circle">✓</span> নবী কারীম (সা.)-এর মসজিদের আদলে আদর্শ মসজিদ নির্মাণ।</li>
+                </ul>`,
+                sheba: `<ul>
+                    <li><span class="check-circle">✓</span> দারিদ্র্য বিমোচন, আর্তমানবতার সেবা ও সমৃদ্ধ দেশ গঠন।</li>
+                    <li><span class="check-circle">✓</span> অসহায় পরিবারের মাঝে ইদ সামগ্রী বিতরণ </li>
+                    <li><span class="check-circle">✓</span> ফ্রি মেডিকেল ক্যাম্প।</li>
+                </ul>`
+            },
+            finance: {
+                utsho: `<ul>
+                    <li><span class="check-circle">✓</span> প্রবাসীদের থেকে প্রাপ্ত স্বেচ্ছাসেবী অনুদান।</li>
+                    <li><span class="check-circle">✓</span> সদস্য ও শুভাকাঙ্ক্ষীদের নিয়মিত ও এককালীন সাহায্য।</li>
+                    <li><span class="check-circle">✓</span> নির্দিষ্ট প্রকল্পের জন্য সংগৃহীত তহবিল।</li>
+                </ul>`,
+                sheba_exp: `<ul>
+                    <li><span class="check-circle">✓</span> দাতাগণের দানের অর্থ শরয়ী নীতিমালা ও দেশীয় আইনের আলোকে ব্যয় করা হয়।</li>
+                    <li><span class="check-circle">✓</span> দাতাগণ যে খাতের জন্য দান করে থাকেন, সে খাতেই ব্যয় করা হয়। এক খাতের অর্থ অন্য খাতে ব্যয় করা হয় না।</li>
+                    <li><span class="check-circle">✓</span> প্রতিটি প্রকল্প সম্পন্ন হওয়ার পর আয়-ব্যয়ের বিস্তারিত হিসাব আন্তর্জাতিক মানদণ্ড অনুসরণ করে সংরক্ষণ করা হয়।</li>
+                </ul>`,
+                admin_exp: `<ul>
+                    <li><span class="check-circle">✓</span> পরিবহন ব্যয়: প্রকল্প সংশ্লিষ্ট মালামাল পরিবহন, কর্মী ও স্বেচ্ছাসবকদের যাতায়াতের খরচ।</li>
+                    <li><span class="check-circle">✓</span> এই ব্যয়ের জন্য সাধারণ তহবিল বা নির্দিষ্ট ব্যবস্থাপনা ফান্ড ব্যবহার।</li>
+                    <li><span class="check-circle">✓</span> বার্ষিক অডিট ও স্বচ্ছতার জন্য প্রয়োজনীয় নিরীক্ষা ব্যয়।</li>
+                    <li><span class="check-circle">✓</span> বিবিধ </li> 
+               </ul>`
+            }
+        };
+
+        // ট্যাব পরিবর্তনের ফাংশন
+        function switchTab(section, category, element) {
+            const contentArea = document.getElementById(section + '-content');
+            const buttons = element.parentElement.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            contentArea.innerHTML = `<div class="fade-in">${contents[section][category]}</div>`;
+        }
+    </script>
+
+</body>
+</html>
