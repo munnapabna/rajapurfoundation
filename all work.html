@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদের কার্যক্রম - রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন</title>
+    <!-- Google Fonts for Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #008343;
+            --dark-footer: #1a3c34;
+            --accent-yellow: #e9bc60;
+            --light-bg: #f4f7f6;
+            --text-dark: #333;
+            --text-muted: #666;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* স্ক্রিন ডানে বামে নড়া বন্ধ করতে */
+        }
+
+        /* --- Header Styles --- */
+        header {
+            background-color: var(--white);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img { height: 45px; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-donate {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
+        /* --- Side Menu Style (Fixed version) --- */
+        .side-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 2000;
+        }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 2001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease-in-out; /* রাইট এর বদলে ট্রান্সফর্ম ব্যবহার */
+            transform: translateX(100%); /* পুরোপুরি স্ক্রিনের বাইরে থাকবে */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .side-menu.active { 
+            transform: translateX(0); /* চাপ দিলে ভেতরে আসবে */
+        }
+        .close-btn {
+            font-size: 30px;
+            color: red;
+            cursor: pointer;
+            text-align: right;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .side-nav-links a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.postimg.cc/jq1wDx16/IMG-7900-(1).jpg');
+            background-size: cover;
+            background-position: center;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .hero h1 { font-size: 32px; margin: 0; border-bottom: 3px solid var(--accent-yellow); padding-bottom: 5px; }
+
+        /* --- Grid & Cards --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        @media (max-width: 768px) { .activities-grid { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { width: 100%; height: 230px; object-fit: cover; }
+        .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag { color: #d68910; font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .card-title { font-size: 22px; margin: 0 0 12px 0; font-weight: 700; color: #1a3c34; }
+        .card-desc { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .btn-detail {
+            margin-top: auto;
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border: 1.5px solid var(--primary-green);
+            color: var(--primary-green);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            background: #f0fdf4;
+        }
+
+        /* --- Newsletter & Footer --- */
+        .newsletter-section {
+            background-color: var(--primary-green);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            margin: 60px 20px;
+            border-radius: 20px;
+        }
+        .subscribe-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 6px;
+            border-radius: 12px;
+            display: flex;
+        }
+        .subscribe-box input { flex: 1; border: none; padding: 12px; outline: none; border-radius: 7px; }
+        .subscribe-box button { background: var(--accent-yellow); border: none; padding: 10px 20px; font-weight: bold; border-radius: 10px; cursor: pointer; }
+
+        footer {
+            background-color: var(--dark-footer);
+            color: #d1d1d1;
+            padding: 70px 5% 20px;
+            background-image: url('https://i.postimg.cc/qR9q3zmJ/file-00000000215c71fd849f261c0467c1bb.png');
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; text-align: center; } }
+        .footer-about img { height: 60px; margin-bottom: 15px; }
+        .footer-col h3 { color: white; margin-bottom: 20px; border-bottom: 2px solid var(--accent-yellow); display: inline-block; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #d1d1d1; text-decoration: none; }
+
+        .social-links { text-align: center; margin: 40px 0; }
+        .social-links a { color: white; font-size: 20px; margin: 0 10px; background: rgba(255,255,255,0.1); width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 13px; }
+        
+        .chat-btn { position: fixed; bottom: 20px; right: 20px; background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <!-- স্লাইড মেনু -->
+    <div class="side-menu-overlay" id="overlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <nav class="side-nav-links">
+            <a href="index.html">হোম</a>
+            <a href="about.html">আমাদের সম্পর্কে</a>
+            <a href="all work.html">সকল কার্যক্রম</a>
+            <a href="member.html">সদস্য পরিচয়</a>
+           
+        </nav>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <a href="https://www.facebook.com/share/18gdrN5ejZ/" target="_blank" class="btn-donate">ফলো করুন</a>
+            <span class="menu-icon" id="menuBtn">☰</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>আমাদের সকল কার্যক্রম</h1>
+    </section>
+
+    <div class="container">
+        <div class="activities-grid">
+            <!-- কার্যক্রম ১ থেকে ১০ -->
+            <div class="card"><img src="https://i.postimg.cc/ncczjtTp/Picsart-26-03-24-19-21-43-558.jpg" class="card-img"><div class="card-content"><span class="tag">📌 অনিয়মিত</span><h2 class="card-title">সিরাত প্রতিযোগিতা</h2><p class="card-desc">সৎ ও দক্ষ প্রজন্ম বিনির্মাণের প্রয়াস।</p><a href="sirat.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/vT1GhGKS/Picsart-26-03-25-07-18-41-283.jpg" class="card-img"><div class="card-content"><span class="tag">📌 প্রতি ঈদে</span><h2 class="card-title">ইদ সামগ্রী বিতরণ</h2><p class="card-desc">অসহায়দের মুখে হাসি ফোটানো।</p><a href="eid.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/qqZxfxQD/1774876142505.png"                 class="card-img"><div class="card-content"><span class="tag">📌 প্রতি শীতে</span><h2 class="card-title">শীতবস্ত্র বিতরণ</h2><p class="card-desc">শীতার্তদের পাশে আমরা।</p><a href="sit.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/Y2Qn45jp/Picsart-26-03-24-22-33-51-036.jpg" class="card-img"><div class="card-content"><span class="tag">📌 প্রতি মাসে</span><h2 class="card-title">দ্বীনি হালাকাহ</h2><p class="card-desc">সঠিক জ্ঞান চর্চার আয়োজন।</p><a href="halaka.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/zXGq0SsJ/Picsart-26-03-25-06-43-47-515.jpg" class="card-img"><div class="card-content"><span class="tag">📌 নিয়মিত</span><h2 class="card-title">শিশুদের কার্যক্রম</h2><p class="card-desc">নৈতিক শিক্ষায় উদ্বুদ্ধ করা।</p><a href="kids.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/Y2bvr9kt/Picsart-26-03-25-06-52-38-793.jpg" class="card-img"><div class="card-content"><span class="tag">📌 বাৎসরিক</span><h2 class="card-title">তাফসির মাহফিল</h2><p class="card-desc">কুরআনের সঠিক ব্যাখ্যা প্রচার।</p><a href="tafsir.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/k5s06DsC/Picsart-26-03-31-21-29-38-755.jpg" class="card-img"><div class="card-content"><span class="tag">📌 প্রতি রমজানে</span><h2 class="card-title">ইফতার প্রজেক্ট</h2><p class="card-desc">রোজাদারদের মাঝে ইফতার পৌঁছানো।</p><a href="ifter.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/Prf2JKc8/Picsart-26-03-24-11-31-18-357.jpg" class="card-img"><div class="card-content"><span class="tag">📌 প্রয়োজন হলে</span><h2 class="card-title">রাস্তা সংস্কার কাজ</h2><p class="card-desc">জনদুর্ভোগ কমাতে মেরামতের উদ্যোগ।</p><a href="road.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/6pJqz1X5/Picsart-26-03-24-22-41-35-577.jpg" class="card-img"><div class="card-content"><span class="tag">📌 অনিয়মিত</span><h2 class="card-title">ফ্রি মেডিকেল ক্যাম্প</h2><p class="card-desc">বিনামূল্যে চিকিৎসা ও ঔষধ।</p><a href="medical.html" class="btn-detail">বিস্তারিত</a></div></div>
+            <div class="card"><img src="https://i.postimg.cc/28qkxcsc/Picsart-26-03-25-06-25-47-292.jpg" class="card-img"><div class="card-content"><span class="tag">📌 প্রয়োজন হলে</span><h2 class="card-title">রক্ত দান</h2><p class="card-desc">ইমার্জেন্সি রক্ত প্রয়োজন রোগীকে রক্ত দিয়ে সাহায্য করা</p><a href="blood.html" class="btn-detail">বিস্তারিত</a></div></div>
+<div class="card"><img src="https://i.postimg.cc/7YCHNsFQ/Picsart-26-04-19-18-07-35-440.jpg" class="card-img"><div class="card-content"><span class="tag">📌 অনিয়মিত</span><h2 class="card-title">মাস্তুরাত তালিম</h2><p class="card-desc">মা বোনদের দ্বীন ইসলাম শেখার জন্য বিশেষ তালিমের আয়োজন</p><a href="women.html" class="btn-detail">বিস্তারিত</a></div></div>
+        </div>
+    </div>
+
+    <!-- নিউজলেটার -->
+    <div class="newsletter-section">
+        <h2>নিয়মিত নিউজলেটার পেতে ফলো করুন</h2>
+        <div class="subscribe-box"><button>সাবস্ক্রাইব</button></div>
+    </div>
+
+    <!-- ফুটার -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about"><img src="https://i.postimg.cc/GmDWJttB/20250526_232045.png"><p>মানবসেবার আদর্শ মহানবী মুহাম্মদ সা.-এর পদাঙ্ক অনুসরণ করে রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশনের এই পথচলা।</p></div>
+            <div class="footer-col"><h3>মেনু</h3><ul><li><a href="about.html">আমাদের সম্পর্কে</a></li><li><a href="all work.html">কার্যক্রম</a></li></ul></div>
+            <div class="footer-col"><h3>যুক্ত হোন</h3><ul><li><a href="member.html">সদস্য</a></li><li><a href="member.html">স্বেচ্ছাসেবক</a></li></ul></div>
+            <div class="footer-col"><h3>অন্যান্য</h3><ul><li><a href="https://www.facebook.com/share/1AyXMqdTCB/">যোগাযোগ</a></li><li><a href="about.html">শর্তাবলী</a></li></ul></div>
+        </div>
+        <div class="social-links"><a href="https://www.facebook.com/share/1CaDfeDLFZ/"><i class="fab fa-facebook-f"></i></a><a href="https://youtube.com/@munna.pabna2k4?si=W3RgKMrYUuJb1hpl"><i class="fab fa-youtube"></i></a></div>
+        <div class="copyright">স্বত্ব © ২০২৫ রাজাপুর উত্তরপাড়া যুব ফাউন্ডেশন।</div>
+    </footer>
+
+    <div class="chat-btn"><i class="fas fa-comment-dots"></i></div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeBtn');
+
+        menuBtn.addEventListener('click', () => {
+            sideMenu.classList.add('active');
+            overlay.style.display = 'block';
+        });
+
+        const closeMenu = () => {
+            sideMenu.classList.remove('active');
+            overlay.style.display = 'none';
+        };
+
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    </script>
+</body>
+</html>
