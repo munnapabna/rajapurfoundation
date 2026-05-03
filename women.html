@@ -93,6 +93,36 @@
             opacity: 1; border: 2px solid var(--primary-green); 
         }
 
+        /* --- Income Expenditure Section --- */
+        .accounts-section { margin-top: 50px; margin-bottom: 50px; }
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .account-box h3 {
+            background: #f1f3f4;
+            padding: 10px;
+            margin: 0;
+            font-size: 18px;
+            border-left: 4px solid var(--primary-green);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        th { color: #666; font-weight: 500; }
+        .amount { text-align: right; font-weight: bold; }
+        .total-row-table { background: #fff8e1; font-weight: bold; }
+
         /* Footer & Newsletter */
         .newsletter-section {
             background-color: var(--newsletter-green); border-radius: 15px;
@@ -173,7 +203,45 @@
             </div>
         </section>
 
-     
+     <!-- Accounts -->
+        <h2 class="section-title">আয় ব্যয় হিসাব</h2>
+        <div class="see-more">মহিলা তালিম বাবদ আয় ব্যয় হিসাব</div>
+        
+        <div class="accounts-section">
+            <div class="accounts-grid">
+                <div class="account-box">
+                    <h3>আয় হিসাব (অর্থ দাতা)</h3>
+                    <table>
+                        <thead><tr><th>দাতার নাম/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>অনিক</td><td class="amount">৫০০</td></tr>
+                            <tr><td>সুমন কাক্কু</td><td class="amount">৩০০</td></tr>
+                            <tr><td>সায়েম</td><td class="amount">২০০</td></tr>
+                            <tr><td>রনি</td><td class="amount">৫০০</td></tr>
+                            <tr><td>অনিকের বোন</td><td class="amount">৩০০</td></tr>
+                            <tr><td>মুন্না</td><td class="amount">৭০০</td></tr>
+                          
+                            <tr class="total-row-table"><td>মোট আয়</td><td class="amount">২৫০০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="account-box">
+                    <h3>ব্যয় হিসাব (খরচ)</h3>
+                    <table>
+                        <thead><tr><th>খাত/বিবরণ</th><th class="amount">পরিমাণ (৳)</th></tr></thead>
+                        <tbody>
+                            <tr><td>প্যান্ডেল বাবদ</td><td class="amount">৫০০</td></tr>
+                            <tr><td>মরিচ+ আদা</td><td class="amount">১০০</td></tr>
+                            <tr><td>তেল,ডাল,মসলা সহ সকল বাজার</td><td class="amount">১৪০০</td></tr>
+                            <tr><td>হুজুরকে হাদিয়া</td><td class="amount">৫০০</td></tr>
+                         
+                          
+                            <tr class="total-row-table"><td>মোট ব্যয়</td><td class="amount">২৫০০</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
     </main>
 
